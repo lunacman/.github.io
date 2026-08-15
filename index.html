@@ -9021,7 +9021,9 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 }&gt;&gt;&lt;font color = &quot;yellow&quot;&gt;你有了一名新队友。&lt;br&gt;在【编队】中将其编入队伍。&lt;/font&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;tanglidui&quot;&gt;&gt;
-  &lt;&lt;set $characterLibrary.donquixote = underfined&gt;&gt;
+  &lt;&lt;if $characterLibrary.hasOwnProperty(&quot;donquixote&quot;)&gt;&gt;
+    &lt;&lt;set $characterLibrary.donquixote = undefined&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
   &lt;&lt;set $party = $party.filter(c =&gt; c.id != &quot;donquixote&quot;)&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="153" name="追杀宏" tags="widget nobr" position="900,100" size="100,100">&lt;&lt;widget &quot;escapeEncounter&quot;&gt;&gt;
   &lt;&lt;if $escapeWithKing and not tags().includes(&quot;noz&quot;)&gt;&gt;
