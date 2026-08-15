@@ -947,12 +947,12 @@ p公司员工带着你们找到了切萨拉部长，那位给你们下了这场�
 [[离开拉曼却？|结局]]&lt;font color=&quot;red&quot;&gt;一个翼的委托绝非玩笑......请确保你有足够的收获。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $lastLocation = passage()&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="北大门" tags="nobr" position="2975,1225" size="100,100">
-这里是拉曼却第二个十字路口，也是最大的那个，你们必须经过这里，才能在a、b、c、d全部四个区域中穿行，但这里并不属于任何区域，所有经行人皆低着头，脚步匆匆，这里理应是个交通枢纽，在拉曼却最繁盛的时期，这里定不似如今冷寂。&lt;br&gt;
+这里是拉曼却第二个十字路口，也是最大的那个，你们必须经过这里&lt;&lt;if $escapeWithKing &amp;&amp; _count &gt;=1&gt;&gt;。&lt;br&gt;
+&lt;font color =&quot;red&quot;&gt;继续逃跑吧。&lt;br&gt;
+希望这十字路口能甩开他们。&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;else&gt;&gt;，才能在a、b、c、d全部四个区域中穿行，但这里并不属于任何区域，所有经行人皆低着头，脚步匆匆，这里理应是个交通枢纽，在拉曼却最繁盛的时期，这里定不似如今冷寂。&lt;br&gt;
 &lt;img src=&quot;img/ditu.png&quot; width=&quot;300px&quot;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $escapeWithKing &amp;&amp; _count &gt;=1&gt;&gt;
-&lt;font color =&quot;red&quot;&gt;继续逃跑吧。&lt;br&gt;
-希望这十字路口能甩开他们。&lt;/font&gt;&lt;br&gt;
+
 &lt;&lt;/if&gt;&gt;
 
 
@@ -1193,6 +1193,7 @@ d区里有什么？摩天轮里有什么？你们将要面对什么？在亲眼�
 [[远离拉曼却之眼（3min）|d2][$minute +=3]]
 
 &lt;&lt;elseif $jindu === 4&gt;&gt;
+拉曼却之眼依旧在你们身后矗立。&lt;br&gt;但一切都已经不一样了。&lt;br&gt;&lt;br&gt;
 [[接近拉曼却之眼（3min）|摩天轮战后][$minute +=3]]&lt;br&gt;
 [[远离拉曼却之眼（3min）|d2][$minute +=3]]&lt;br&gt;
 
@@ -1227,7 +1228,9 @@ d区里有什么？摩天轮里有什么？你们将要面对什么？在亲眼�
 [[向拉曼却之眼前进——你们不能后退（3min）|d3][$minute +=3]]&lt;&lt;/if&gt;&gt;
 
 
-&lt;&lt;else&gt;&gt;
+&lt;&lt;elseif $jindu === 4&gt;&gt;
+d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼位于漩涡最底层。&lt;br&gt;
+会组织你们的一切障碍都被扫除，现在的d区看起来越显狭小。&lt;br&gt;&lt;br&gt;
 [[向拉曼却之眼前进|d3][$minute +=3]]
 [[远离拉曼却之眼|d1][$minute +=3]]
 &lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
@@ -5645,6 +5648,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
   你们看看安静躺倒在地上的拉曼却之主。即使你们没杀死他，他看起来也和死了一样安静。&lt;br&gt;
   现在只要离开拉曼却前往提交委托就好。&lt;br&gt;
   切萨拉定会喜欢你们交出的答卷。&lt;br&gt;&lt;br&gt;
+  [[离去吧|d3]]&lt;br&gt;&lt;br&gt;
   &lt;div class=&quot;kaishi&quot;&gt;&lt;&lt;linkreplace &quot;但如果......你们还能做得更好？&quot;&gt;&gt;
   &lt;br&gt;[[带着真正的堂吉诃德逃离拉曼却|决战][$escapeWithKing = true, $xunluoc = 70]]
   &lt;&lt;/linkreplace&gt;&gt;&lt;/div&gt;
@@ -5655,6 +5659,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
   拉曼却乐园的故事，在你们手中终结。&lt;br&gt;
   现在只要离开拉曼却前往提交委托就好。&lt;br&gt;
   切萨拉定会喜欢你们交出的答卷。&lt;br&gt;&lt;br&gt;
+  [[离去吧|d3]]&lt;br&gt;&lt;br&gt;
   &lt;div class=&quot;kaishi&quot;&gt;&lt;&lt;linkreplace &quot;但如果......你们还能做得更好？&quot;&gt;&gt;
   [[带着真正的堂吉诃德逃离拉曼却|决战][$escapeWithKing = true, $xunluoc = 70]]
   &lt;&lt;/linkreplace&gt;&gt;&lt;/div&gt;
@@ -9104,7 +9109,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;&lt;set _newText += &quot;自从失去了乐园的主人、家人们唯一的父亲，拉曼却就已经等同于死了。p公司的绞杀持续了整整三周，乐园的废墟被反复翻掘，每一寸土地都被鲜血浸透，每一个角落都被探照灯照亮。拉曼却依旧每日开启关闭，不愿放任何一个家人彻底自由，这里是他们两百年的囚笼，也是他们不止一个二百年的家。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
     &lt;&lt;set _newText += &quot;干渴、绝望，屠杀、被屠杀，杀戮、死亡。他们数着身边还活着的面孔越来越少。他们看着族人一个接一个倒下，杀死他们的不是刀剑，而是如影随形的绝望和疯狂。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
     &lt;&lt;set _newText += &quot;就在那时，他们又从p公司职员的口中得到了一个消息——被从拉曼却夺走的“父亲”仍在在p公司最深处的实验室里活着，日复一日地被切开、被穿刺、被分析、被榨取。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
-    &lt;&lt;set _newText += &quot;暴怒早已在漫长的绝望中耗尽了。剩下的只有一种冷彻骨髓的意志。桑丘最后一次召集了剩下的所有家人。她说：我们不配得到幸福。我们恨他，但我们依旧比任何人都爱他。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
+    &lt;&lt;set _newText += &quot;暴怒早已在漫长的绝望中耗尽了。剩下的只有一种冷彻骨髓的意志。桑秋最后一次召集了剩下的所有家人。她说：我们不配得到幸福。我们恨他，但我们依旧比任何人都爱他。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
     &lt;&lt;set _newText += &quot;于是所有仅剩的家人一同制定了一个计划。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
     &lt;&lt;set _newText += &quot;她将血枪刺进每一个家人胸口，她用力咽下即将溢出的血泪，发疯般推进、刺穿、撕裂，施与死前最后的痛苦。而所有受害者被要求在痛苦中激发此生所有怨念，对她施下最恶毒的诅咒，咒她永远饥渴，咒她永世疯狂，咒她短寿，咒她之血如瘟疫一般摧毁一切。无论他们多么渴望她赐予的死亡。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
     &lt;&lt;set _newText += &quot;分明是你情我愿一同谋划最后的复仇，却不得不让场景宛如施暴。他们必须拼死将血渗入长枪的每一道铭文，堵塞她的咽喉、蒙蔽她的口鼻、挤压她的胸腔，如沉水一般在怨恨中溺死。&lt;br&gt;&lt;br&gt;&quot; &gt;&gt;
