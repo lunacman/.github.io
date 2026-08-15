@@ -7116,7 +7116,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 &lt;&lt;set _deadParty = []&gt;&gt;
 &lt;&lt;for _i to 0; _i lt $party.length; _i++&gt;&gt;
   &lt;&lt;set _p = $party[_i]&gt;&gt;
-  &lt;&lt;if _p.hp &lt;= 0&gt;&gt;
+  &lt;&lt;if _p.hp &lt;= 0 and _i != 0&gt;&gt;  /* 跳过主角（索引0） */
     &lt;&lt;if _specialIds.includes(_p.id)&gt;&gt;
       /* 特殊角色：移到库并恢复1 HP */
       &lt;&lt;set $characterLibrary[_p.id] = clone(_p)&gt;&gt;
@@ -7895,7 +7895,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
       &lt;&lt;linkreplace &quot;动手吧，她不会怪你的&quot;&gt;&gt;
         &lt;&lt;replace &quot;#zhanbai11&quot;&gt;&gt;
           &lt;&lt;shixie&gt;&gt;生死不重要，立场也不重要，在梦醒之后，她似乎只是在等待最后的终结，利刃搅碎血魔的心脏，她精疲力竭，没有反抗，或许你们反而是让她如愿。&lt;br&gt;&lt;br&gt;
-          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$sang1 = 0]]&lt;&lt;/if&gt;&gt;
+          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$sang1 = 0]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$sang1 = 0]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
       &lt;&lt;linkreplace &quot;放她一马，——或许她会怪你也说不定&quot;&gt;&gt;
@@ -7917,7 +7917,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
       &lt;&lt;linkreplace &quot;杀了她&quot;&gt;&gt;
         &lt;&lt;replace &quot;#zhanbai12&quot;&gt;&gt;
           &lt;&lt;shixie&gt;&gt;血魔的生命力过于顽强，你们用武器搅碎妮可丽娜的心脏，可在你们离开之前，耳边却一直似有似无地回响着她的笑声。&lt;br&gt;&lt;br&gt;
-          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$li1 = 0]]&lt;&lt;/if&gt;&gt;
+          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$li1 = 0]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$li1 = 0]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
       &lt;&lt;linkreplace &quot;放她一马&quot;&gt;&gt;
@@ -7925,7 +7925,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
           你们把妮可丽娜丢在原地，径直离开了。她或许终于感到累了，随着你们走远，她的笑声在你们身后渐渐淡去。
           &lt;&lt;if $duhg &lt;=-3&gt;&gt;&lt;&lt;set $duhg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;
           &lt;&lt;if $sanghg &lt;=-3&gt;&gt;&lt;&lt;set $sanghg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$li1 = 3]]&lt;&lt;/if&gt;&gt;
+          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$li1 = 3]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$li1 = 3]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;
     &lt;/div&gt;
@@ -7946,7 +7946,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#zhanbai13&quot;&gt;&gt;
           &lt;&lt;shixie&gt;&gt;你们几乎怀疑羊头的血魔是在鼓励你们这么做，你们搅碎他的心脏，留他在自己的忏悔室里死去，他端坐的动作没有丝毫改变。&lt;br&gt;&lt;br&gt;
-          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$shen1 = 0]]&lt;&lt;/if&gt;&gt;
+          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$shen1 = 0]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$shen1 = 0]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
       &lt;&lt;linkreplace &quot;放他一马&quot;&gt;&gt;
@@ -7954,7 +7954,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
           在确定他短时间无法恢复后，你们绕过他，开始翻找他的房间。而他至始至终没有抬头去看你们。或许生死对他是最不重要的事。你们的决定是对的吗？谁都说不好。
           &lt;&lt;if $duhg &lt;=-3&gt;&gt;&lt;&lt;set $duhg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;
           &lt;&lt;if $sanghg &lt;=-3&gt;&gt;&lt;&lt;set $sanghg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$shen1 = 3]]&lt;&lt;/if&gt;&gt;
+          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$shen1 = 3]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$shen1 = 3]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;
     &lt;/div&gt;
@@ -7963,7 +7963,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;font color =&quot;yellow&quot;&gt;血魔管理的面具中似乎蕴含着奇特的力量。你们带走了古良布洛的面具。&lt;/font&gt;
     &lt;&lt;set $mianjub = 1&gt;&gt;&lt;&lt;set $party[0].fy += 8&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;else&gt;&gt;你们没追上古良布洛。&lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$shen1 = 2]]&lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;古良布洛丢下了你们。他用全部的血你们拖曳住你们的脚步，直到他在一处遮蔽中消失，你们再也找不到他了。&lt;br&gt;古良布洛逃走了。已经不再有任何职责需要他承担，你们在终末之前给他带来了短暂的自由。&lt;br&gt;你们没追上古良布洛。&lt;br&gt;&lt;br&gt;&lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$shen1 = 3]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$shen1 = 3]]&lt;&lt;/if&gt;&gt;
   &lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -7977,7 +7977,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
         &lt;&lt;replace &quot;#zhanbai14&quot;&gt;&gt;
           &lt;&lt;shixie&gt;&gt;或许你们给了她一个足够华丽的落幕，血从胸前的伤口涌出，在她衣襟上绣上一朵开得灿烂的玫瑰。现在的她像个睡美人。只有醒不过来的睡美人才是最美的。&lt;br&gt;
           &lt;&lt;if $tang === 1&gt;&gt;堂吉诃德捂住胸口，当你们关切地询问她时，她显得和你们同样奇怪，说她的心脏突然有点不舒服，一种绵延的刺痛感挥之不去。&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$du1 = 0]]&lt;&lt;/if&gt;&gt;
+          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$du1 = 0]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$du1 = 0]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
       &lt;&lt;linkreplace &quot;放她一马&quot;&gt;&gt;
@@ -7985,7 +7985,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
           不知出于什么心态，你们甚至给公主摆了个睡着舒服的姿势。公主确实美极了，平躺的她简直是一个睡美人，至于她什么时候会醒来，那个时候你们肯定早已离开了。&lt;br&gt;
           &lt;&lt;if $tang === 1&gt;&gt;你们听到堂吉诃德长长地叹了一口气。&lt;&lt;/if&gt;&gt;
           &lt;&lt;if $sanghg &lt;=-3&gt;&gt;&lt;&lt;set $sanghg +=2&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$du1 = 3]]&lt;&lt;/if&gt;&gt;
+          &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$du1 = 3]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$du1 = 3]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;
     &lt;/div&gt;
@@ -8002,12 +8002,12 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
   &lt;div id=&quot;zhanbai18&quot;&gt;
     &lt;&lt;linkreplace &quot;杀死他&quot;&gt;&gt;
       &lt;&lt;replace &quot;#zhanbai18&quot;&gt;&gt;
-        &lt;&lt;shixie&gt;&gt;不管怎么样，他是人类的大敌。你们用比那些木桩更狠的力道刺穿他的胸口。&lt;br&gt;这般强大的血魔本应很难杀死，不知为何他却在配合你们主动掐断自己的生机，好像他等这天已经很久了。&lt;br&gt;&lt;br&gt;&lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|摩天轮战后][$don1 = 3]]&lt;&lt;/if&gt;&gt;
+        &lt;&lt;shixie&gt;&gt;不管怎么样，他是人类的大敌。你们用比那些木桩更狠的力道刺穿他的胸口。&lt;br&gt;这般强大的血魔本应很难杀死，不知为何他却在配合你们主动掐断自己的生机，好像他等这天已经很久了。&lt;br&gt;&lt;br&gt;&lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$don1 = 0]]&lt;&lt;else&gt;&gt;[[走吧|摩天轮战后][$don1 = 0]]&lt;&lt;/if&gt;&gt;
       &lt;&lt;/replace&gt;&gt;
     &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
     &lt;&lt;linkreplace &quot;放过他&quot;&gt;&gt;
       &lt;&lt;replace &quot;#zhanbai18&quot;&gt;&gt;
-        你们把堂吉诃德留在摩天轮上。你们交付委托的筹码已经足够，留着这个血魔王者，或许比杀死他更好。&lt;br&gt;&lt;br&gt;&lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|摩天轮战后][$don1 = 3]]&lt;&lt;/if&gt;&gt;
+        你们把堂吉诃德留在摩天轮上。你们交付委托的筹码已经足够，留着这个血魔王者，或许比杀死他更好。&lt;br&gt;&lt;br&gt;&lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$don1 = 3]]&lt;&lt;else&gt;&gt;[[走吧|摩天轮战后][$don1 = 3]]&lt;&lt;/if&gt;&gt;
       &lt;&lt;/replace&gt;&gt;
     &lt;&lt;/linkreplace&gt;&gt;
   &lt;/div&gt;
