@@ -1357,7 +1357,7 @@ d区里有什么？摩天轮里有什么？你们将要面对什么？在亲眼�
 ......里面有一种&lt;font color =&quot;red&quot;&gt;&lt;i&gt;很不妙的味道&lt;/i&gt;&lt;/font&gt;。&lt;br&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
 
-&lt;&lt;set $lastLocation = passage()&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="d2" tags="nobr" position="2725,1125" size="100,100">
+&lt;&lt;set $lastLocation = passage()&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="d2" tags="nobr noz" position="2725,1125" size="100,100">
 
 &lt;&lt;if $escapeWithKing &amp;&amp; _count &gt;=1&gt;&gt;
 &lt;font color =&quot;red&quot;&gt;d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼位于漩涡最底层。&lt;br&gt;
@@ -1441,7 +1441,7 @@ d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼�
   fy: 7,
   cooldowns: {},
   skills: [
-    { id: &quot;pierce&quot;, name: &quot;穿刺&quot;, type: &quot;attack&quot;, target: &quot;single&quot;, power: 1.3, desc: &quot;低伤害攻击&quot; },
+    { id: &quot;pierce&quot;, name: &quot;穿刺&quot;, type: &quot;attack&quot;, target: &quot;single&quot;, power: 1, desc: &quot;低伤害攻击&quot; },
     { id: &quot;assassinate&quot;, name: &quot;暗杀&quot;, type: &quot;attack&quot;, target: &quot;single&quot;, power: 2.2, cooldown: 3, desc: &quot;高伤害突袭，冷却3回合&quot; }
   ],
   buffs: [],
@@ -1459,8 +1459,9 @@ d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼�
   fy: 9,
   cooldowns: {},
   skills: [
-    { id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, target: &quot;single&quot;, power: 1.0, desc: &quot;普普通通的远程射击&quot; },
-    { id: &quot;precision&quot;, name: &quot;精准&quot;, type: &quot;buff&quot;, target: &quot;single&quot;, effectId: &quot;atkUp&quot;, effectName: &quot;攻击提升&quot;, effectValue: 0.3, duration: 3, desc: &quot;自身攻击+30%，持续3回合&quot; }
+    { id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, target: &quot;single&quot;, power: 1.0, fixedDamage: 15, variance: 10, desc: &quot;普普通通的远程射击，不受力量影响&quot; }
+    { id: &quot;precision&quot;, name: &quot;干扰&quot;, type: &quot;debuff&quot;, target: &quot;single&quot;, effectTarget: &quot;enemy&quot;, effectId: &quot;defDown&quot;, effectName: &quot;防御降低&quot;, effectValue: -0.2, duration: 2, desc: &quot;降低目标20%防御，持续2回合&quot; },
+    { id: &quot;weaken&quot;, name: &quot;弱化&quot;, type: &quot;debuff&quot;, target: &quot;single&quot;, effectTarget: &quot;enemy&quot;, effectId: &quot;atkDown&quot;, effectName: &quot;攻击降低&quot;, effectValue: -0.2, duration: 2, desc: &quot;降低目标20%攻击，持续2回合&quot; }
   ],
   buffs: [],
   debuffs: []
@@ -2155,7 +2156,8 @@ Debuff：&lt;&lt;if $party[0].debuffs.length &gt; 0&gt;&gt;&lt;&lt;for _d range 
 
 
 
-</tw-passagedata><tw-passagedata pid="42" name="StorySubtitle" tags="" position="0,0" size="100,100">ver 1.1.0</tw-passagedata><tw-passagedata pid="43" name="StoryAuthor" tags="" position="0,25" size="100,100">乌鸦</tw-passagedata><tw-passagedata pid="44" name="PassageFooter" tags="nobr" position="500,0" size="100,100">
+</tw-passagedata><tw-passagedata pid="42" name="StorySubtitle" tags="" position="0,0" size="100,100">&lt;img src=&quot;img/beijing.png&quot; width=&quot;150px&quot;&gt;
+ver 1.1.0</tw-passagedata><tw-passagedata pid="43" name="StoryAuthor" tags="" position="0,25" size="100,100">乌鸦</tw-passagedata><tw-passagedata pid="44" name="PassageFooter" tags="nobr" position="500,0" size="100,100">
 &lt;&lt;if !$escapeWithKing&gt;&gt;
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;&lt;duouyu&gt;&gt;&lt;br&gt;&lt;br&gt;
@@ -2275,7 +2277,7 @@ Debuff：&lt;&lt;if $party[0].debuffs.length &gt; 0&gt;&gt;&lt;&lt;for _d range 
 
 
   [[🔍 查看|交流_查看]]&lt;br&gt;
-[[🤝 交谈|交流_交谈]]&lt;br&gt;
+/*[[🤝 交谈|交流_交谈]]&lt;br&gt;*/
 
   &lt;br&gt;
   [[取消|主战斗]]
@@ -2424,7 +2426,7 @@ Debuff：&lt;&lt;if $party[0].debuffs.length &gt; 0&gt;&gt;&lt;&lt;for _d range 
   /* ===== 按优先级顺序判断 ===== */
 
   /* 1. 王堂 + 桑秋（组合） */
-  &lt;&lt;if _enemyIds.includesAll([&quot;king_donquixote&quot;, &quot;sangqiu&quot;] || _enemyIds.includes(&quot;king_donquixote&quot;)&gt;&gt;
+  &lt;&lt;if _enemyIds.includesAll([&quot;king_donquixote&quot;, &quot;sangqiu&quot;]) or _enemyIds.includes(&quot;king_donquixote&quot;)&gt;&gt;
     那扇门在你们踏入的时候已封锁。今日的拉曼却，只有一方能活着出去。&lt;br&gt;[[继续战斗|主战斗]]
 
   /* 3. 杜尔西内亚 + 妮可丽娜/古良布洛 任意组合（包括三人） */
@@ -3539,15 +3541,15 @@ Debuffs：
             &lt;&lt;set $party[0].skills.push({ id: &quot;triple_stab&quot;, name: &quot;三重刺&quot;, type: &quot;attack&quot;, power: 0.8, weapon: &quot;dagger&quot;, desc: &quot;连续三次刺击&quot; })&gt;&gt;
           &lt;&lt;case &quot;spear&quot;&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;thrust&quot;, name: &quot;突刺&quot;, type: &quot;attack&quot;, power: 1.8, weapon: &quot;spear&quot;, desc: &quot;猛刺目标&quot; })&gt;&gt;
-            &lt;&lt;set $party[0].skills.push({ id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, power: 2.5, weapon: &quot;spear&quot;, desc: &quot;消耗1子弹射击&quot;, consume: { type: &quot;bullet&quot;, amount: 1 } })&gt;&gt;
+            &lt;&lt;set $party[0].skills.push({ id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, power: 2.5, fixedDamage: 37, variance: 16, weapon: &quot;spear&quot;, desc: &quot;消耗1子弹射击，不受力量影响&quot;, consume: { type: &quot;bullet&quot;, amount: 1 } })&gt;&gt;
           &lt;&lt;case &quot;bow&quot;&gt;&gt;
-            &lt;&lt;set $party[0].skills.push({ id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, weapon: &quot;bow&quot;, desc: &quot;高精度射击&quot; })&gt;&gt;
+            &lt;&lt;set $party[0].skills.push({ id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, fixedDamage: 20, variance: 10, weapon: &quot;bow&quot;, desc: &quot;高精度射击，不受力量影响&quot; })&gt;&gt;
           &lt;&lt;case &quot;hammer&quot;&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;smash&quot;, name: &quot;猛砸&quot;, type: &quot;attack&quot;, power: 2.2, weapon: &quot;hammer&quot;, desc: &quot;强力砸击&quot; })&gt;&gt;
           &lt;&lt;case &quot;shard&quot;&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;shard_strike&quot;, name: &quot;碎片打击&quot;, type: &quot;attack&quot;, power: 0.8, weapon: &quot;shard&quot;, desc: &quot;用碎片攻击&quot; })&gt;&gt;
           &lt;&lt;case &quot;喷火器&quot;&gt;&gt;
-              &lt;&lt;set $party[0].skills.push({ id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, weapon: &quot;喷火器&quot;, desc: &quot;喷射火焰，消耗燃料&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } })&gt;&gt;
+              &lt;&lt;set $party[0].skills.push({ id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, fixedDamage: 20, variance: 20, weapon: &quot;喷火器&quot;, desc: &quot;消耗燃料，喷射火焰，不受力量影响&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } })&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;flamethrower_punch&quot;, name: &quot;捶打&quot;, type: &quot;attack&quot;, power: 1, weapon: &quot;喷火器&quot;, desc: &quot;用喷火器捶打&quot; })&gt;&gt;
         &lt;&lt;/switch&gt;&gt;
         &lt;&lt;redo&gt;&gt;
@@ -3768,8 +3770,7 @@ Debuffs：
 &lt;&lt;if $zhinanzhen === 1&gt;&gt;一对巴掌大的&lt;font color=&quot;blue&quot;&gt;指南针&lt;/font&gt;，里面都没有指针，一个背面刻着“未来未来”，一个背面刻着“勒忒”。&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $ditu === 1&gt;&gt;一块描绘了整个拉曼却的硬血浮雕地图，中间d区的位置被镂空成巴掌大的空洞，b区中心也有一处小小的镂空。&lt;br&gt;
-&lt;&lt;if $ditu === 2&gt;&gt;一块描绘了整个拉曼却的硬血浮雕地图，中心d区的位置被镂空成巴掌大的空洞。&lt;br&gt;
-&lt;&lt;if $beibao.includes(&quot;小屋雕塑&quot;)&gt;&gt;你取出背包里的那个小雕塑看看，意识到它们的材质、颜色、雕刻工艺都极端相似，小雕塑的大小正好可以嵌入地图在b区的镂空。&lt;br&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $beibao.includes(&quot;小屋雕塑&quot;)&gt;&gt;你取出背包里的那个小雕塑看看，意识到它们的材质、颜色、雕刻工艺都极端相似，小雕塑的大小正好可以嵌入地图在b区的镂空。&lt;br&gt;&lt;font coor = &quot;yellow&quot;&gt;——这是b区正中缺失的b5区域。&lt;/font&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;linkreplace &quot;查看地图&quot;&gt;&gt;
 &lt;&lt;ditu&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
 
@@ -3880,36 +3881,7 @@ Debuffs：
 
  &lt;&lt;widget &quot;yuguo&quot;&gt;&gt;
   &lt;&lt;if $yuguo === 1&gt;&gt;
-    &lt;&lt;if _enemyIds.includes(&quot;sangqiu&quot;) or _enemyIds.includes(&quot;nicoletta_support&quot;) or _enemyIds.includes(&quot;nicoletta_attack&quot;) or _enemyIds.includes(&quot;guillermo_support&quot;) or _enemyIds.includes(&quot;guillermo_defense&quot;) or _enemyIds.includes(&quot;dulcinea&quot;)&gt;&gt;
-      &lt;&lt;if $ygxieyi2 == &quot;无&quot;&gt;&gt;
-        ”这个我可以杀吗？“雨果转着匕首问。&lt;br&gt;&lt;br&gt;
-        &lt;div id=&quot;yg&quot;&gt;
-          &lt;&lt;linkreplace &quot;交给你了&quot;&gt;&gt;
-            &lt;&lt;replace &quot;#yg&quot;&gt;&gt;
-              &lt;&lt;set $ygxieyi2 = &quot;管理&quot;&gt;&gt;
-              雨果擦净自己的匕首，匕首入鞘，他安分地站到一边：”嘿，兄弟们，这部分协议完成了，接下来我不会再抢你们的贡献分了。“
-              &lt;&lt;if _enemyIds.includes(&quot;sangqiu&quot;)&gt;&gt;&lt;&lt;set $sang1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
-              &lt;&lt;if _enemyIds.includes(&quot;nicoletta_support&quot;) or _enemyIds.includes(&quot;nicoletta_attack&quot;)&gt;&gt;&lt;&lt;set $li1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
-              &lt;&lt;if _enemyIds.includes(&quot;guillermo_support&quot;) or _enemyIds.includes(&quot;guillermo_defense&quot;)&gt;&gt;&lt;&lt;set $shen1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
-              &lt;&lt;if _enemyIds.includes(&quot;dulcinea&quot;)&gt;&gt;&lt;&lt;set $du1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
-              &lt;br&gt;&lt;br&gt;
-              &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续下一个|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
-            &lt;&lt;/replace&gt;&gt;
-          &lt;&lt;/linkreplace&gt;&gt;|
-          &lt;&lt;linkreplace &quot;这次不行&quot;&gt;&gt;
-            &lt;&lt;replace &quot;#yg&quot;&gt;&gt;
-              ”好吧，谁让我答应你们了，“雨果无所谓地耸肩，”只要你们自己不杀，不让我杀也不算违约。但是我现在还没杀过管理血魔，你们有实力战胜他们，如果离开这里之前我没能杀掉一个，你们也是会被判为违约的。“&lt;br&gt;&lt;br&gt;
-              &lt;&lt;if _enemyIds.includes(&quot;nicoletta_support&quot;) or _enemyIds.includes(&quot;nicoletta_attack&quot;)&gt;&gt;&lt;&lt;set $li1 = 3&gt;&gt;&lt;&lt;/if&gt;&gt;
-              &lt;&lt;if _enemyIds.includes(&quot;guillermo_support&quot;) or _enemyIds.includes(&quot;guillermo_defense&quot;)&gt;&gt;&lt;&lt;set $shen1 = 3&gt;&gt;&lt;&lt;/if&gt;&gt;
-              &lt;&lt;if _enemyIds.includes(&quot;dulcinea&quot;)&gt;&gt;&lt;&lt;set $du1 = 3&gt;&gt;&lt;&lt;/if&gt;&gt;
-              &lt;br&gt;&lt;br&gt;
-              &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续下一个|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
-            &lt;&lt;/replace&gt;&gt;
-          &lt;&lt;/linkreplace&gt;&gt;
-        &lt;/div&gt;
-      &lt;&lt;/if&gt;&gt;
-
-    &lt;&lt;elseif _enemyIds.includesAll([&quot;dulcinea&quot;, &quot;guillermo&quot;]) or _enemyIds.includesAll([&quot;dulcinea&quot;, &quot;nicoletta&quot;]) or _enemyIds.includesAll([&quot;nicoletta&quot;, &quot;guillermo&quot;]) or _enemyIds.includesAll([&quot;dulcinea&quot;, &quot;nicoletta&quot;, &quot;guillermo&quot;])&gt;&gt;
+   &lt;&lt;if passage() == &quot;d2&quot;&gt;&gt;
       &lt;&lt;if $ygxieyi2 == &quot;无&quot;&gt;&gt;
         雨果拔出匕首走到你们身边：“需要我提醒你们吗？这可能是完成协议的最后机会了。”&lt;br&gt;&lt;br&gt;
         &lt;div id=&quot;yg&quot;&gt;
@@ -3924,13 +3896,8 @@ Debuffs：
           &lt;&lt;/linkreplace&gt;&gt;
         &lt;/div&gt;
       &lt;&lt;/if&gt;&gt;
-
-    &lt;&lt;elseif _enemyIds.includes(&quot;king_donquixote_support&quot;) or _enemyIds.includes(&quot;king_donquixote_attack&quot;)&gt;&gt;
-      &lt;&lt;if $ygxieyi2 == &quot;无&quot;&gt;&gt;
-        你们问雨果要不要用这位拉曼却之主完成你们的委托，他看起来颇为意动，但到最后，他摇头拒绝了你们：“不行，一位一代眷属，不能死在我手上，我知道这是巨大的利益，但我更害怕沾染亲手杀死他导致的所有因果，抱歉了。”&lt;br&gt;&lt;br&gt;
-      &lt;&lt;/if&gt;&gt;
-
-    &lt;&lt;elseif _enemyIds.includesAll([&quot;king_donquixote_support&quot;, &quot;sangqiu&quot;]) or _enemyIds.includesAll([&quot;king_donquixote_attack&quot;, &quot;sangqiu&quot;])&gt;&gt;
+      
+      &lt;&lt;elseif _enemyIds.includesAll([&quot;king_donquixote_support&quot;, &quot;sangqiu&quot;]) or _enemyIds.includesAll([&quot;king_donquixote_attack&quot;, &quot;sangqiu&quot;])&gt;&gt;
       &lt;&lt;if $ygxieyi2 == &quot;无&quot;&gt;&gt;
         雨果沉默一会儿：“这真的是最后的机会了。”他拔出匕首，盯着倒地的桑秋，眼神里流露出一股癫狂。&lt;br&gt;&lt;br&gt;
         &lt;div id=&quot;yg&quot;&gt;
@@ -3950,6 +3917,46 @@ Debuffs：
           &lt;&lt;/linkreplace&gt;&gt;
         &lt;/div&gt;
       &lt;&lt;/if&gt;&gt;
+   
+
+    &lt;&lt;elseif _enemyIds.includes(&quot;sangqiu&quot;) or _enemyIds.includes(&quot;nicoletta_support&quot;) or _enemyIds.includes(&quot;nicoletta_attack&quot;) or _enemyIds.includes(&quot;guillermo_support&quot;) or _enemyIds.includes(&quot;guillermo_defense&quot;) or _enemyIds.includes(&quot;dulcinea&quot;)&gt;&gt;
+      &lt;&lt;if $ygxieyi2 == &quot;无&quot;&gt;&gt;
+        ”这个我可以杀吗？“雨果转着匕首问。&lt;br&gt;&lt;br&gt;
+        &lt;div id=&quot;yg&quot;&gt;
+          &lt;&lt;linkreplace &quot;交给你了&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#yg&quot;&gt;&gt;
+              雨果擦净自己的匕首，匕首入鞘，他安分地站到一边：”嘿，兄弟们，这部分协议完成了，接下来我不会再抢你们的贡献分了。“
+              &lt;&lt;if _enemyIds.includes(&quot;sangqiu&quot;)&gt;&gt;&lt;&lt;set $ygxieyi2 = &quot;桑秋&quot;&gt;&gt;
+&lt;&lt;elseif _enemyIds.includes(&quot;dulcinea&quot;)&gt;&gt;&lt;&lt;set $ygxieyi2 = &quot;杜尔西内亚&quot;&gt;&gt;
+&lt;&lt;elseif _enemyIds.includes(&quot;nicoletta_support&quot;) or _enemyIds.includes(&quot;nicoletta_attack&quot;)&gt;&gt;&lt;&lt;set $ygxieyi2 = &quot;妮可丽娜&quot;&gt;&gt;
+&lt;&lt;elseif _enemyIds.includes(&quot;guillermo_support&quot;) or _enemyIds.includes(&quot;guillermo_defense&quot;)&gt;&gt;&lt;&lt;set $ygxieyi2 = &quot;古良布洛&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+              &lt;&lt;if _enemyIds.includes(&quot;sangqiu&quot;)&gt;&gt;&lt;&lt;set $sang1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
+              &lt;&lt;if _enemyIds.includes(&quot;dulcinea&quot;)&gt;&gt;&lt;&lt;set $du1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
+              &lt;&lt;if _enemyIds.includes(&quot;nicoletta_support&quot;) or _enemyIds.includes(&quot;nicoletta_attack&quot;)&gt;&gt;&lt;&lt;set $li1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
+              &lt;&lt;if _enemyIds.includes(&quot;guillermo_support&quot;) or _enemyIds.includes(&quot;guillermo_defense&quot;)&gt;&gt;&lt;&lt;set $shen1 = 0&gt;&gt;&lt;&lt;/if&gt;&gt;
+              &lt;br&gt;&lt;br&gt;
+              &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续下一个|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
+            &lt;&lt;/replace&gt;&gt;
+          &lt;&lt;/linkreplace&gt;&gt;|
+          &lt;&lt;linkreplace &quot;这次不行&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#yg&quot;&gt;&gt;
+              ”好吧，谁让我答应你们了，“雨果无所谓地耸肩，”只要你们自己不杀，不让我杀也不算违约。但是我现在还没杀过管理血魔，你们有实力战胜他们，如果离开这里之前我没能杀掉一个，你们也是会被判为违约的。“&lt;br&gt;&lt;br&gt;
+              &lt;&lt;if _enemyIds.includes(&quot;nicoletta_support&quot;) or _enemyIds.includes(&quot;nicoletta_attack&quot;)&gt;&gt;&lt;&lt;set $li1 = 3&gt;&gt;&lt;&lt;/if&gt;&gt;
+              &lt;&lt;if _enemyIds.includes(&quot;guillermo_support&quot;) or _enemyIds.includes(&quot;guillermo_defense&quot;)&gt;&gt;&lt;&lt;set $shen1 = 3&gt;&gt;&lt;&lt;/if&gt;&gt;
+              &lt;&lt;if _enemyIds.includes(&quot;dulcinea&quot;)&gt;&gt;&lt;&lt;set $du1 = 3&gt;&gt;&lt;&lt;/if&gt;&gt;
+              &lt;br&gt;&lt;br&gt;
+              &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续下一个|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
+            &lt;&lt;/replace&gt;&gt;
+          &lt;&lt;/linkreplace&gt;&gt;
+        &lt;/div&gt;
+      &lt;&lt;/if&gt;&gt;
+   
+    &lt;&lt;elseif _enemyIds.includes(&quot;king_donquixote_support&quot;) or _enemyIds.includes(&quot;king_donquixote_attack&quot;)&gt;&gt;
+      &lt;&lt;if $ygxieyi2 == &quot;无&quot;&gt;&gt;
+        你们问雨果要不要用这位拉曼却之主完成你们的委托，他看起来颇为意动，但到最后，他摇头拒绝了你们：“不行，一位一代眷属，不能死在我手上，我知道这是巨大的利益，但我更害怕沾染亲手杀死他导致的所有因果，抱歉了。”&lt;br&gt;&lt;br&gt;
+      &lt;&lt;/if&gt;&gt;
+
 
     &lt;&lt;else&gt;&gt;
       &lt;&lt;if $ygxieyi &lt; 5&gt;&gt;
@@ -4153,6 +4160,7 @@ Debuffs：
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
+&lt;&lt;widget &quot;beibaodiuqiWidget&quot;&gt;&gt;
 &lt;&lt;do tag &quot;beibaodiuqi&quot;&gt;&gt;
 &lt;&lt;if not $beibao&gt;&gt; &lt;&lt;set $beibao = []&gt;&gt; &lt;&lt;/if&gt;&gt;
   &lt;font color=&quot;yellow&quot;&gt;杂物：&lt;/font&gt;
@@ -4204,6 +4212,7 @@ Debuffs：
     没有杂物。
   &lt;&lt;/if&gt;&gt;
 &lt;&lt;/do&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
 
 
 </tw-passagedata><tw-passagedata pid="83" name="武器柜" tags="nobr" position="1150,1225" size="100,100">
@@ -4274,10 +4283,10 @@ Debuffs：
     &lt;&lt;set $party[0].skills = $party[0].skills.filter(s =&gt; s.weapon != _oldWeapon)&gt;&gt;
   &lt;&lt;/if&gt;&gt;
   &lt;&lt;set $equippedWeapon to &quot;spear&quot;&gt;&gt;
-  &lt;&lt;set $bullets to 6&gt;&gt;  /* 默认6颗 */
+  &lt;&lt;if $tezhi.includes(&quot;战争储备&quot;)&gt;&gt;&lt;&lt;set $bullets to 10&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $bullets to 6&gt;&gt;  /* 默认6颗 */&lt;&lt;/if&gt;&gt;
   &lt;&lt;set _newSkills = [
     { id: &quot;thrust&quot;, name: &quot;突刺&quot;, type: &quot;attack&quot;, power: 1.8, desc: &quot;猛刺目标&quot;, weapon: &quot;spear&quot; },
-    { id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, power: 2.5, desc: &quot;消耗1子弹射击&quot;, weapon: &quot;spear&quot;, consume: { type: &quot;bullet&quot;, amount: 1 } }
+    { id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, power: 2.5, fixedDamage: 37, variance: 16, desc: &quot;消耗1子弹射击&quot;, weapon: &quot;spear&quot;, consume: { type: &quot;bullet&quot;, amount: 1 } }
   ]&gt;&gt;
   &lt;&lt;set $party[0].skills = $party[0].skills.concat(_newSkills)&gt;&gt;
   &lt;&lt;redo &quot;weaponCabinet&quot;&gt;&gt;
@@ -4298,7 +4307,7 @@ Debuffs：
   &lt;&lt;set $equippedWeapon to &quot;bow&quot;&gt;&gt;
   &lt;&lt;set $bullets to 0&gt;&gt;
   &lt;&lt;set _newSkills = [
-    { id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, desc: &quot;高精度射击&quot;, weapon: &quot;bow&quot; }
+   { id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, fixedDamage: 20, variance: 10, desc: &quot;高精度射击，不受力量影响&quot;, weapon: &quot;bow&quot; }
   ]&gt;&gt;
   &lt;&lt;set $party[0].skills = $party[0].skills.concat(_newSkills)&gt;&gt;
   &lt;&lt;redo &quot;weaponCabinet&quot;&gt;&gt;
@@ -4714,7 +4723,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
             &lt;&lt;set $fuel += 30&gt;&gt;
             &lt;&lt;set $ysshy += 40&gt;&gt;
             &lt;&lt;set $party[0].skills.push(
-              { id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, weapon: &quot;喷火器&quot;, desc: &quot;喷射火焰，消耗燃料&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } },
+             { id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, fixedDamage: 20, variance: 20, weapon: &quot;喷火器&quot;, desc: &quot;消耗燃料，喷射火焰，不受力量影响&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } },
               { id: &quot;flamethrower_punch&quot;, name: &quot;捶打&quot;, type: &quot;attack&quot;, power: 1, weapon: &quot;喷火器&quot;, desc: &quot;用喷火器捶打&quot; }
             )&gt;&gt;
             &lt;&lt;redo &quot;shop&quot;&gt;&gt;
@@ -5300,7 +5309,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 &lt;&lt;if $tang ===1 &amp;&amp; $jxdu ===0&gt;&gt;
 &lt;&lt;set $juexing1 = 4&gt;&gt;&lt;&lt;set $juexing2 = 10&gt;&gt;&lt;&lt;juexing&gt;&gt;&lt;&lt;set $jxdu = 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 [[观察那位“公主”|公主]]&lt;br&gt;&lt;br&gt;
-&lt;&lt;elseif $du !=1 &amp;&amp; $xunluoc ===1 &gt;&gt;
+&lt;&lt;elseif $du1 !=1 &amp;&amp; $xunluoc ===1 &gt;&gt;
 斯人已逝。高高在上的舞台上没有了那位美丽的公主，但巨象依旧在走着那条循环一生的道路，血魔们依旧簇拥着空无一人的舞台继续游行。&lt;br&gt;
 或许公主不是游行的主人，不是c区的缰绳，她也只是乐园的一枚齿轮，一个被游行操控的傀儡。&lt;br&gt;
 那些血魔不会再阻拦你们了。&lt;br&gt;
@@ -5337,8 +5346,6 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 
 
 &lt;&lt;widget &quot;duduihua&quot;&gt;&gt;
-&lt;&lt;if $tang ===1 &amp;&amp; $jxdu ===0&gt;&gt;
-&lt;&lt;set $juexing1 = 4&gt;&gt;&lt;&lt;set $juexing2 = 10&gt;&gt;&lt;&lt;juexing&gt;&gt;&lt;&lt;set $jxdu = 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 她没有主动攻击，意思是你们或许能和她聊上两句。——当然，必须非常小心。&lt;br&gt;
 同时......她现在在她的区域之外，这是个难得的机会。&lt;br&gt;&lt;br&gt;
 &lt;&lt;linkreplace &quot;问些问题&quot;&gt;&gt;
@@ -5873,7 +5880,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 这里是游行队的至高点，如同公主在游行中的地位般，华丽而至高无上，却比公主本人更能撑得住时间。不像妮可丽娜和古良布洛还有自己的房间，游行队永远游行，公主也永远游行，这座舞台仿佛就是杜尔西内亚的全部。&lt;br&gt;
 她拥有一整个c区，一整支游行队，但她似乎没留下任何”自己的东西“，只是守着那个封锁了摩天轮的机关。&lt;br&gt;&lt;br&gt;
 
-你们要找的机关嵌在舞台正中，&lt;&lt;if $jindu ===2&gt;&gt;&lt;font color = &quot;red&quot;&gt;红色&lt;/font&gt;的指示灯颜色如血，诱惑着你们去打开它。&lt;br&gt;
+你们要找的机关嵌在舞台正中，&lt;&lt;if $jindu != 3&gt;&gt;&lt;font color = &quot;red&quot;&gt;红色&lt;/font&gt;的指示灯颜色如血，诱惑着你们去打开它。&lt;br&gt;
 &lt;&lt;linkreplace &quot;打开机关&quot;&gt;&gt;
 &lt;&lt;set $jindu = 3&gt;&gt;随着按钮按下，红色的指示灯转为&lt;font color =&quot;green&quot;&gt;绿色&lt;/font&gt;，整个拉曼却猛地一震，在场所有人都能清晰地感受到。震感来自你们的南方，十字路口的方向。&lt;br&gt;
 十字路口处的最后一扇门，前往核心处拉曼却之眼的路，应该已经开放了。&lt;br&gt;&lt;br&gt;&lt;&lt;/linkreplace&gt;&gt;
@@ -5893,7 +5900,9 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 &lt;&lt;else&gt;&gt;
 她淡淡地扫你们一眼，一言不发，无视了你们继续向出口走去。
 &lt;&lt;duduihua&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="公主战" tags="noz" position="3325,325" size="100,100">紫色阳伞凭空出现在杜尔西内亚手中，你的偷袭并未成功，阳伞旋转，她瞬间从极静转为极动，身形一晃，阳伞边缘已经覆盖上一层红色，以一种骇人的速度向你们切割而来。
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $tang ===1 &amp;&amp; $jxdu ===0&gt;&gt;
+&lt;&lt;set $juexing1 = 4&gt;&gt;&lt;&lt;set $juexing2 = 10&gt;&gt;&lt;&lt;juexing&gt;&gt;&lt;&lt;set $jxdu = 1&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="公主战" tags="noz" position="3325,325" size="100,100">紫色阳伞凭空出现在杜尔西内亚手中，你的偷袭并未成功，阳伞旋转，她瞬间从极静转为极动，身形一晃，阳伞边缘已经覆盖上一层红色，以一种骇人的速度向你们切割而来。
 趁其不备。速战速决。
 
 &lt;&lt;linkreplace &quot;战斗要素&quot;&gt;&gt;
@@ -6532,7 +6541,6 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 &lt;&lt;set $minute = 0&gt;&gt;
 &lt;&lt;set $time = 0&gt;&gt;
 
-&lt;&lt;set $zidan = 0&gt;&gt;&lt;&lt;set $ranliao = 0&gt;&gt;
 &lt;&lt;set $beibao = []&gt;&gt;
 &lt;&lt;set $weizhi = 0&gt;&gt;&lt;&lt;set $turnUsed = false&gt;&gt;
 
@@ -6642,7 +6650,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 
 
 &lt;&lt;set $equippedWeapon to &quot;&quot;&gt;&gt;
-&lt;&lt;set $bullets to 0&gt;&gt;  /* 初始无子弹，武器柜装备枪刺时设为6 */
+&lt;&lt;set $bullets to 0&gt;&gt;  /* 初始无子弹，武器柜装备枪刺时设为6 */&lt;&lt;set $fuel = 0&gt;&gt;
 
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="属性计算" tags="widget nobr" position="550,825" size="100,100">
@@ -6677,115 +6685,312 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="131" name="【购买】" tags="nobr" position="950,900" size="100,100">
 &lt;&lt;set $return = passage()&gt;&gt;
 &lt;&lt;if $zhoumu === 1&gt;&gt;
-&lt;&lt;goto &quot;中继&quot;&gt;&gt;
+  &lt;&lt;goto &quot;中继&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
+  &lt;&lt;do tag &quot;shop&quot;&gt;&gt;
+    &lt;&lt;set $dschiyou = $dszong - $dsshiyong&gt;&gt;
 
-&lt;&lt;set $dschiyou = $dszong - $dsshiyong&gt;&gt;
+    &lt;font color=&quot;yellow&quot;&gt;解锁新结局可获得继承点，达成条件复杂的结局获得的继承点更多。&lt;br&gt;使用继承点，为你的下一次尝试铺路：&lt;/font&gt;&lt;br&gt;
 
-&lt;font color=&quot;yellow&quot;&gt;解锁新结局可获得继承点，达成条件复杂的结局获得的继承点更多。&lt;br&gt;使用继承点，为你的下一次尝试铺路：&lt;/font&gt;&lt;br&gt;
+    点数：&lt;font color=&quot;yellow&quot;&gt;$dsshiyong&lt;/font&gt; / $dszong（剩余&lt;font color=&quot;green&quot;&gt;$dschiyou&lt;/font&gt;）&lt;br&gt;
+    &lt;br&gt;&lt;br&gt;
 
-点数：&lt;font color =&quot;yellow&quot;&gt; $dsshiyong &lt;/font&gt;/ $dszong（剩余&lt;font color =&quot;green&quot;&gt; $dschiyou&lt;/font&gt;）&lt;br&gt;
-&lt;br&gt;&lt;br&gt;
+    /* ===== 力量锻炼 ===== */
+    力量锻炼：提升攻击性。（cost2）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;力量锻炼&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 2&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;力量锻炼&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 2&gt;&gt;
+          &lt;&lt;set $party[0].gj += 10&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;力量锻炼&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 2&gt;&gt;
+          &lt;&lt;set $party[0].gj -= 10&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-力量锻炼：提升攻击性。（cost2）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;力量锻炼&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 2&gt;&gt;[[【购买】][$tezhi.push(&quot;力量锻炼&quot;);$dsshiyong += 2;$party[0].gj += 10]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;力量锻炼&quot;);$dsshiyong -= 2;$party[0].gj -= 10]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 装甲置备 ===== */
+    装甲置备：提升防御力。（cost1）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;装甲置备&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 1&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;装甲置备&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 1&gt;&gt;
+          &lt;&lt;set $party[0].fy += 5&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;装甲置备&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 1&gt;&gt;
+          &lt;&lt;set $party[0].fy -= 5&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-装甲置备：提升防御力。（cost1）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;装甲置备&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 1&gt;&gt;[[【购买】][$tezhi.push(&quot;装甲置备&quot;);$dsshiyong += 1;$party[0].fy += 5]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;装甲置备&quot;);$dsshiyong -= 1;$party[0].fy -= 5]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 耐受特训 ===== */
+    耐受特训：提升承受力。（cost2）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;耐受特训&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 2&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;耐受特训&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 2&gt;&gt;
+          &lt;&lt;set $party[0].maxHp += 40&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;耐受特训&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 2&gt;&gt;
+          &lt;&lt;set $party[0].maxHp -= 40&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-耐受特训：提升承受力。（cost2）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;耐受特训&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 2&gt;&gt;[[【购买】][$tezhi.push(&quot;耐受特训&quot;);$dsshiyong += 2;$party[0].maxHp += 40]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;耐受特训&quot;);$dsshiyong -= 2;$party[0].maxHp -= 40]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 预算充足 ===== */
+    预算充足：你们可以多带点钱。（cost4）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;预算充足&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 4&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;预算充足&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 4&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;预算充足&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 4&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-预算充足：你们可以多带点钱。（cost4）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;预算充足&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 4&gt;&gt;[[【购买】][$tezhi.push(&quot;预算充足&quot;);$dsshiyong += 4]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;预算充足&quot;);$dsshiyong -= 4]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 战争储备 ===== */
+    战争储备：获得更多子弹，收尾人们会出售武器。（cost5）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;战争储备&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 2&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;战争储备&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 2&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;战争储备&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 2&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-战争储备：获得更多子弹，收尾人们会出售武器。（cost5）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;战争储备&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 2&gt;&gt;[[【购买】][$tezhi.push(&quot;战争储备&quot;);$dsshiyong += 2]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;战争储备&quot;);$dsshiyong -= 2]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 巧舌如簧 ===== */
+    巧舌如簧：你的鬼话不止能迷惑人类，还能迷惑血魔。（cost3）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;巧舌如簧&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 3&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;巧舌如簧&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;巧舌如簧&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-巧舌如簧：你的鬼话不止能迷惑人类，还能迷惑血魔。（cost3）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;巧舌如簧&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;巧舌如簧&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;巧舌如簧&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 狗鼻子 ===== */
+    狗鼻子：你很擅长“找东西”。（cost3）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;狗鼻子&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 3&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;狗鼻子&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;&lt;if not $tezhi.includes(&quot;寻血猎犬&quot;)&gt;&gt;
+        &lt;div class=&quot;tuihuan&quot;&gt;
+          &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+            &lt;&lt;set $tezhi.delete(&quot;狗鼻子&quot;)&gt;&gt;
+            &lt;&lt;set $dsshiyong -= 3&gt;&gt;
+            &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+          &lt;&lt;/link&gt;&gt;
+        &lt;/div&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-狗鼻子：你很擅长“找东西”。（cost3）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;狗鼻子&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;狗鼻子&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;&lt;if !$tezhi.includes(&quot;寻血猎犬&quot;)&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;狗鼻子&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 寻血猎犬（依赖狗鼻子） ===== */
+    &lt;&lt;if $tezhi.includes(&quot;狗鼻子&quot;)&gt;&gt;
+      &lt;font color=&quot;yellow&quot;&gt;寻血猎犬：死物、活物，痕迹、线索、秘密，什么都逃不过你的追寻。（cost3）&lt;/font&gt;&lt;br&gt;
+      &lt;&lt;if not $tezhi.includes(&quot;寻血猎犬&quot;)&gt;&gt;
+        &lt;&lt;if $dschiyou &gt;= 3&gt;&gt;
+          &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+            &lt;&lt;set $tezhi.push(&quot;寻血猎犬&quot;)&gt;&gt;
+            &lt;&lt;set $dsshiyong += 3&gt;&gt;
+            &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+          &lt;&lt;/link&gt;&gt;
+        &lt;&lt;else&gt;&gt;
+          &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+        &lt;&lt;/if&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;div class=&quot;tuihuan&quot;&gt;
+          &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+            &lt;&lt;set $tezhi.delete(&quot;寻血猎犬&quot;)&gt;&gt;
+            &lt;&lt;set $dsshiyong -= 3&gt;&gt;
+            &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+          &lt;&lt;/link&gt;&gt;
+        &lt;/div&gt;
+      &lt;&lt;/if&gt;&gt;
+      &lt;br&gt;&lt;br&gt;
+    &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;if $tezhi.includes(&quot;狗鼻子&quot;)&gt;&gt;&lt;font color=&quot;yellow&quot;&gt;寻血猎犬：死物、活物，痕迹、线索、秘密，什么都逃不过你的追寻。（cost3）&lt;/font&gt;&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;寻血猎犬&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;寻血猎犬&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;寻血猎犬&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
+    /* ===== 私人合同 ===== */
+    私人合同：p公司特别邀请了你们，背靠公司能获得更多的补给。（cost3）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;私人合同&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 3&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;私人合同&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;私人合同&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-/*血魔猎手：你很了解怎么杀伤血魔，血魔猎人们可能会有什么想说的。（cost4）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;血魔猎手&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 4&gt;&gt;[[【购买】][$tezhi.push(&quot;血魔猎手&quot;);$dsshiyong += 4]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;血魔猎手&quot;);$dsshiyong -= 4]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;*/
+    /* ===== 潜行大师 ===== */
+    潜行大师：万花丛中过，片叶不沾身。（cost2）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;潜行大师&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 2&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;潜行大师&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 2&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;潜行大师&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 2&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-/*人际关系：你先前和协会有过合作，所以他们有人认得你们。（cost3）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;人际关系&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;人际关系&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;人际关系&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;*/
+    /* ===== 呼吸法 ===== */
+    呼吸法：通过调息，你能更好地调整自己的状态。（cost3）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;呼吸法&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 3&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;呼吸法&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;呼吸法&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-私人合同：p公司特别邀请了你们，背靠公司能获得更多的补给。（cost3）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;私人合同&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;私人合同&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;私人合同&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+    /* ===== 嗜血 ===== */
+    嗜血：杀戮让你感觉良好。（cost3）&lt;br&gt;
+    &lt;&lt;if not $tezhi.includes(&quot;嗜血&quot;)&gt;&gt;
+      &lt;&lt;if $dschiyou &gt;= 3&gt;&gt;
+        &lt;&lt;link &quot;【购买】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.push(&quot;嗜血&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong += 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;&lt;else&gt;&gt;
+        &lt;font color=&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;div class=&quot;tuihuan&quot;&gt;
+        &lt;&lt;link &quot;【退还】&quot;&gt;&gt;
+          &lt;&lt;set $tezhi.delete(&quot;嗜血&quot;)&gt;&gt;
+          &lt;&lt;set $dsshiyong -= 3&gt;&gt;
+          &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+      &lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;br&gt;&lt;br&gt;
 
-/*古老传说：你听你的祖辈讲过一个血魔乐园的故事，他们的遗物中甚至有张依旧鲜红的传单。（cost3）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;古老传说&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;古老传说&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;&lt;if !$tezhi.includes(&quot;故人之子&quot;)&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;古老传说&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $tezhi.includes(&quot;古老传说&quot;)&gt;&gt;&lt;font color=&quot;yellow&quot;&gt;故人之子：你找遍了祖宅，才找到了一些破碎的记录，你的祖辈惋惜那乐园在某一天突然消失，他说他很想念乐园中的一位朋友。（5cost）&lt;/font&gt;&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;故人之子&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 5&gt;&gt;[[【购买】][$tezhi.push(&quot;故人之子&quot;);$dsshiyong += 5]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;故人之子&quot;);$dsshiyong -= 5]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;*/
-
-潜行大师：万花丛中过，片叶不沾身。（cost2）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;潜行大师&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 2&gt;&gt;[[【购买】][$tezhi.push(&quot;潜行大师&quot;);$dsshiyong += 2]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;潜行大师&quot;);$dsshiyong -= 2]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-/*死地后生：越接近死亡，你就能爆发出越大的潜力。（cost2）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;死地后生&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 2&gt;&gt;[[【购买】][$tezhi.push(&quot;死地后生&quot;);$dsshiyong += 2]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;死地后生&quot;);$dsshiyong -= 2]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;*/
-
-呼吸法：通过调息，你能更好地调整自己的状态。（cost3）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;呼吸法&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;呼吸法&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;呼吸法&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-嗜血：杀戮让你感觉良好。（cost3）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;嗜血&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 3&gt;&gt;[[【购买】][$tezhi.push(&quot;嗜血&quot;);$dsshiyong += 3]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;嗜血&quot;);$dsshiyong -= 3]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-/*恶之心：你可以让故事更加极端。（cost6）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;恶之心&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 6&gt;&gt;[[【购买】][$tezhi.push(&quot;恶之心&quot;);$dsshiyong += 6]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;恶之心&quot;);$dsshiyong -= 6]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-善之魂：你可以让故事更加极端。（cost6）&lt;br&gt;&lt;&lt;if !$tezhi.includes (&quot;善之魂&quot;)&gt;&gt;
-&lt;&lt;if $dschiyou &gt;= 6&gt;&gt;[[【购买】][$tezhi.push(&quot;善之魂&quot;);$dsshiyong += 6]]&lt;&lt;else&gt;&gt;&lt;font color =&quot;grey&quot;&gt;继承点不足。&lt;/font&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;
-[[【退还】|【购买】][$tezhi.delete(&quot;善之魂&quot;);$dsshiyong -= 6]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;*/
-
-
-[[确认|中继]]&lt;br&gt;
-[[重置|【购买】][$tezhi = [];$dsshiyong = 0]]&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;span style=&quot;display: inline-block; border: 2px solid #f5f5f5; padding: 5px 10px; margin: 2px; border-radius: 5px;&quot;&gt;[[真正的重置]]&lt;/span&gt;&lt;br&gt;
+    /* ===== 确认 &amp; 重置 ===== */
+    [[确认|中继]]&lt;br&gt;
+    &lt;&lt;link &quot;重置&quot;&gt;&gt;
+      &lt;&lt;set $tezhi = []&gt;&gt;
+      &lt;&lt;set $dsshiyong = 0&gt;&gt;
+      &lt;&lt;redo &quot;shop&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+    &lt;br&gt;&lt;br&gt;&lt;br&gt;
+    &lt;span style=&quot;display: inline-block; border: 2px solid #f5f5f5; padding: 5px 10px; margin: 2px; border-radius: 5px;&quot;&gt;[[真正的重置]]&lt;/span&gt;&lt;br&gt;
+  &lt;&lt;/do&gt;&gt;
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="132" name="中继" tags="" position="1075,900" size="100,100">
 
 &lt;&lt;if $tezhi.includes(&quot;巧舌如簧&quot;)&gt;&gt;&lt;&lt;set $mibaohg = 2&gt;&gt; &lt;&lt;set $duhg = -3&gt;&gt;&lt;&lt;set $lihg = -3&gt;&gt;&lt;&lt;set $shenhg = -3&gt;&gt; &lt;&lt;set $tanghg = 1&gt;&gt; &lt;&lt;set $sanghg = -3&gt;&gt;&lt;&lt;/if&gt;&gt;
@@ -6874,7 +7079,8 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 [[没事了|$lastLocation]]
 </tw-passagedata><tw-passagedata pid="135" name="封面" tags="" position="825,900" size="100,100">
 &lt;img src=&quot;img/beijing.png&quot; width=&quot;600px&quot;&gt;
-&lt;span style=&quot;font-size: 22px&quot;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[开始游戏|【购买】]]&lt;/div&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="136" name="失败的委托" tags="noz noreturn nobr" position="450,1800" size="100,100">
+&lt;span style=&quot;font-size: 22px&quot;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[开始游戏|【购买】]]&lt;/div&gt;&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="136" name="失败的委托" tags="noz noreturn nobr" position="450,1800" size="100,100">
 
 &lt;&lt;set _endingName = &quot;失败的委托&quot;&gt;&gt;
 
@@ -8378,7 +8584,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
           他被你的动作吓了一跳，在搞懂了你的意思后，他有点无法理解：&quot;为什么？到了手的贡献分你不收？我们的协议可是约定好了，前五个血魔都是我的，如果不按照我们的约定行事，十一协不会放过你们的！&quot;&lt;br&gt;
           &lt;&lt;linkreplace &quot;告诉他你有计划&quot;&gt;&gt;&lt;br&gt;
             你告诉雨果你心里有数。&lt;br&gt;
-            他挑挑眉，毫不介意地表现出好奇：&quot;好吧，什么时候你觉得可以开刀了就告诉我，我就会收取我应得的报酬，记得我要五个，——当然，如果你愿意的话，管理血魔也可以算在这五个里面。&quot;&lt;br&gt;&lt;&lt;set $xuluoa_ += 1&gt;&gt;
+            他挑挑眉，毫不介意地表现出好奇：&quot;好吧，什么时候你觉得可以开刀了就告诉我，我就会收取我应得的报酬，记得我要五个，——当然，如果你愿意的话，管理血魔也可以算在这五个里面。&quot;&lt;br&gt;&lt;&lt;set $xunluoa_ += 1&gt;&gt;
             他还算配合地收回匕首。&lt;br&gt;&lt;br&gt;
             [[丢下血魔，继续前进|分兵]]
           &lt;&lt;/linkreplace&gt;&gt;
@@ -8387,7 +8593,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
       &lt;br&gt;&lt;&lt;linkreplace &quot;默许他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#yg&quot;&gt;&gt;
           雨果用匕首刺穿血魔的心脏。他自称参加了全部四次拉曼却讨伐，至少他杀血魔的手段确实干净利落，一击毙命，他在血魔华丽的衣物上随手擦净匕首：&quot;合作愉快，还剩四个。&quot;&lt;br&gt;&lt;br&gt;
-          &lt;&lt;set $ygxieyi =1&gt;&gt;&lt;&lt;set $xuluoa -= 1&gt;&gt;
+          &lt;&lt;set $ygxieyi =1&gt;&gt;&lt;&lt;set $xunluoa -= 1&gt;&gt;
           [[继续前进|分兵]]
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;
@@ -8398,13 +8604,13 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;damen&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#damen&quot;&gt;&gt;
-          你用武器刺穿了那个血魔的心脏。既能增加你们的贡献分，又能消减拉曼却领的危险，何乐而不为。&lt;&lt;set $xuluoa -= 1&gt;&gt;&lt;br&gt;&lt;br&gt;
+          你用武器刺穿了那个血魔的心脏。既能增加你们的贡献分，又能消减拉曼却领的危险，何乐而不为。&lt;&lt;set $xunluoa -= 1&gt;&gt;&lt;br&gt;&lt;br&gt;
           [[继续前进|分兵]]
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;
       &lt;br&gt;&lt;&lt;linkreplace &quot;放过他&quot;&gt;&gt;&lt;br&gt;
         &lt;&lt;replace &quot;#damen&quot;&gt;&gt;
-          你不想杀了这个血魔，不管是出于什么原因。虽然其他的队员可能不甚理解，但他们习惯于相信你的任何计划。&lt;&lt;set $xuluoa_ += 1&gt;&gt;&lt;br&gt;&lt;br&gt;
+          你不想杀了这个血魔，不管是出于什么原因。虽然其他的队员可能不甚理解，但他们习惯于相信你的任何计划。&lt;&lt;set $xunluoa_ += 1&gt;&gt;&lt;br&gt;&lt;br&gt;
           [[走吧|分兵]]
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;
@@ -8473,7 +8679,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;xunluozhanbaib&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#xunluozhanbaib&quot;&gt;&gt;
-          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xuluoa -= 1&gt;&gt;
+          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xunluoa -= 1&gt;&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;|
@@ -8494,7 +8700,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;xunluozhanbaib&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#xunluozhanbaib&quot;&gt;&gt;
-          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xuluoa -= 1&gt;&gt;
+          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xunluoa -= 1&gt;&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;|
@@ -8515,7 +8721,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;xunluozhanbaib&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#xunluozhanbaib&quot;&gt;&gt;
-          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xuluoa -= 1&gt;&gt;
+          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xunluoa -= 1&gt;&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;|
@@ -8536,7 +8742,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;xunluozhanbaib&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#xunluozhanbaib&quot;&gt;&gt;
-          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xuluob -= 1&gt;&gt;
+          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xunluob -= 1&gt;&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;|
@@ -8557,7 +8763,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;xunluozhanbaib&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#xunluozhanbaib&quot;&gt;&gt;
-          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xuluob -= 1&gt;&gt;
+          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xunluob -= 1&gt;&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;|
@@ -8578,7 +8784,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;xunluozhanbaib&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#xunluozhanbaib&quot;&gt;&gt;
-          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xuluob -= 1&gt;&gt;
+          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;set $xunluob -= 1&gt;&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;|
@@ -8599,13 +8805,13 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;div id=&quot;sb&quot;&gt;
       &lt;&lt;linkreplace &quot;杀了他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#sb&quot;&gt;&gt;
-          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;if $weizhi === 1&gt;&gt;&lt;&lt;set $xunluoa -= 1&gt;&gt;&lt;&lt;elseif $weizhi === 2&gt;&gt;&lt;&lt;set $xuluob -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;
+          &lt;&lt;shixie&gt;&gt;想要杀你们，早该做好死亡的准备。&lt;br&gt;&lt;&lt;if $weizhi === 1&gt;&gt;&lt;&lt;set $xunluoa -= 1&gt;&gt;&lt;&lt;elseif $weizhi === 2&gt;&gt;&lt;&lt;set $xunluob -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;|
       &lt;&lt;linkreplace &quot;放过他&quot;&gt;&gt;
         &lt;&lt;replace &quot;#sb&quot;&gt;&gt;
-          &lt;&lt;set $xunluob +=1&gt;&gt;&lt;&lt;if $weizhi === 1&gt;&gt;&lt;&lt;set $xunluoa_ += 1&gt;&gt;&lt;&lt;elseif $weizhi === 2&gt;&gt;&lt;&lt;set $xuluob_ += 1&gt;&gt;&lt;&lt;/if&gt;&gt;只要他们不妨碍你，你也不想大开杀戒。&lt;&lt;if $duhg &lt;=-3&gt;&gt;&lt;&lt;set $duhg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;
+          &lt;&lt;set $xunluob +=1&gt;&gt;&lt;&lt;if $weizhi === 1&gt;&gt;&lt;&lt;set $xunluoa_ += 1&gt;&gt;&lt;&lt;elseif $weizhi === 2&gt;&gt;&lt;&lt;set $xunluob_ += 1&gt;&gt;&lt;&lt;/if&gt;&gt;只要他们不妨碍你，你也不想大开杀戒。&lt;&lt;if $duhg &lt;=-3&gt;&gt;&lt;&lt;set $duhg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;
@@ -9058,9 +9264,14 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
         &lt;&lt;/if&gt;&gt;
         &lt;&lt;for _t range _targets&gt;&gt;
           &lt;&lt;if _t.hp &gt; 0&gt;&gt;
-            &lt;&lt;set _base = (_actor.gj || 10)&gt;&gt;
-            &lt;&lt;set _dmg = _skill.power * _base * (0.8 + Math.random() * 0.4)&gt;&gt;
-            &lt;&lt;set _dmg = Math.floor(_dmg)&gt;&gt;
+            &lt;&lt;if _skill.fixedDamage&gt;&gt;
+    &lt;&lt;set _dmg = _skill.fixedDamage + random(0, _skill.variance or 0)&gt;&gt;
+    &lt;&lt;set _dmg = Math.floor(_dmg)&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;set _base = (_actor.gj || 10)&gt;&gt;
+    &lt;&lt;set _dmg = _skill.power * _base * (0.8 + Math.random() * 0.4)&gt;&gt;
+    &lt;&lt;set _dmg = Math.floor(_dmg)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
             &lt;&lt;for _b range _actor.buffs&gt;&gt; &lt;&lt;if _b.id == &quot;atkUp&quot;&gt;&gt; &lt;&lt;set _dmg = Math.floor(_dmg * (1 + _b.value))&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/for&gt;&gt;
             &lt;&lt;for _d range _t.debuffs&gt;&gt; &lt;&lt;if _d.id == &quot;defDown&quot;&gt;&gt; &lt;&lt;set _dmg = Math.floor(_dmg * (1 - _d.value))&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/for&gt;&gt;
             &lt;&lt;for _b range _t.buffs&gt;&gt; &lt;&lt;if _b.id == &quot;reduceDamage&quot;&gt;&gt; &lt;&lt;set _dmg = _dmg - _b.value&gt;&gt; &lt;&lt;if _dmg &lt; 1&gt;&gt; &lt;&lt;set _dmg = 1&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/for&gt;&gt;
@@ -9089,9 +9300,14 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
       &lt;&lt;else&gt;&gt;
         /* 单体攻击 */
         &lt;&lt;if _target and _target.hp &gt; 0&gt;&gt;
-          &lt;&lt;set _base = (_actor.gj || 10)&gt;&gt;
-          &lt;&lt;set _dmg = _skill.power * _base * (0.8 + Math.random() * 0.4)&gt;&gt;
-          &lt;&lt;set _dmg = Math.floor(_dmg)&gt;&gt;
+          &lt;&lt;if _skill.fixedDamage&gt;&gt;
+    &lt;&lt;set _dmg = _skill.fixedDamage + random(0, _skill.variance or 0)&gt;&gt;
+    &lt;&lt;set _dmg = Math.floor(_dmg)&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;set _base = (_actor.gj || 10)&gt;&gt;
+    &lt;&lt;set _dmg = _skill.power * _base * (0.8 + Math.random() * 0.4)&gt;&gt;
+    &lt;&lt;set _dmg = Math.floor(_dmg)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
           &lt;&lt;for _b range _actor.buffs&gt;&gt; &lt;&lt;if _b.id == &quot;atkUp&quot;&gt;&gt; &lt;&lt;set _dmg = Math.floor(_dmg * (1 + _b.value))&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/for&gt;&gt;
           &lt;&lt;for _d range _target.debuffs&gt;&gt; &lt;&lt;if _d.id == &quot;defDown&quot;&gt;&gt; &lt;&lt;set _dmg = Math.floor(_dmg * (1 - _d.value))&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/for&gt;&gt;
           &lt;&lt;for _b range _target.buffs&gt;&gt; &lt;&lt;if _b.id == &quot;reduceDamage&quot;&gt;&gt; &lt;&lt;set _dmg = _dmg - _b.value&gt;&gt; &lt;&lt;if _dmg &lt; 1&gt;&gt; &lt;&lt;set _dmg = 1&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt; &lt;&lt;/for&gt;&gt;
@@ -9430,29 +9646,8 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="155" name="测试β" tags="" position="2875,925" size="100,100">
 
-&lt;&lt;set $jindu = 4&gt;&gt;&lt;&lt;set $don1 = 3&gt;&gt;&lt;&lt;set $characterLibrary.donquixote = {
-  id: &quot;donquixote&quot;,
-  name: &quot;堂吉诃德&quot;,
-  isMain: false,
-  hp: 200,         /* 原110 → 200，大幅提升生存 */
-  maxHp: 200,
-  gj: 30,          /* 原20 → 45，攻击力显著提升，逃课核心 */
-  fy: 13,          /* 原9 → 20，防御也提高 */
-  cooldowns: {},
-  skills: [
-    { id: &quot;knight_strike&quot;, name: &quot;骑士突刺&quot;, type: &quot;attack&quot;, power: 1.4, desc: &quot;骑士之攻击&quot; }, /* power 1.4 → 1.8 */
-    { id: &quot;righteous_guard&quot;, name: &quot;正义守护&quot;, type: &quot;defense&quot;, shield: 15, desc: &quot;获得15点减伤&quot; }, /* 10 → 15 */
-    { id: &quot;knight_oath&quot;, name: &quot;骑士宣言&quot;, type: &quot;cancel&quot;, effectTarget: &quot;enemy&quot;, desc: &quot;强行封锁敌方一回合&quot; }
-  ],
-  buffs: [],
-  debuffs: []
-}&gt;&gt;&lt;&lt;set $tang = 1&gt;&gt;&lt;&lt;set $equippedWeapon to &quot;spear&quot;&gt;&gt;
-  &lt;&lt;set $bullets to 6&gt;&gt;  /* 默认6颗 */
-  &lt;&lt;set _newSkills = [
-    { id: &quot;thrust&quot;, name: &quot;突刺&quot;, type: &quot;attack&quot;, power: 1.8, desc: &quot;猛刺目标&quot;, weapon: &quot;spear&quot; },
-    { id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, power: 2.5, desc: &quot;消耗1子弹射击&quot;, weapon: &quot;spear&quot;, consume: { type: &quot;bullet&quot;, amount: 1 } }
-  ]&gt;&gt;&lt;&lt;set $party[0].skills = $party[0].skills.concat(_newSkills)&gt;&gt;&lt;&lt;set $yao1 = 5&gt;&gt;&lt;&lt;set $yao2 = 3&gt;&gt;
-&lt;&lt;goto &quot;摩天轮战后&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="156" name="来晚了" tags="nobr" position="675,1425" size="100,100">
+&lt;&lt;set $du1 = 1&gt;&gt;&lt;&lt;set $tang = 1&gt;&gt;&lt;&lt;set $tangjx = 3&gt;&gt;
+[[c1]]</tw-passagedata><tw-passagedata pid="156" name="来晚了" tags="nobr" position="675,1425" size="100,100">
 &lt;&lt;if hasVisited(&quot;任务&quot;) &gt;&gt;
 你们花费了太多时间。你们不该浪费这么多时间。等你们终于赶到p公司的门前时，被特意划出来的区域已经锁门，毫不留情地将你们拒之门外。&lt;br&gt;
 不管门后的其他人今日之后会如何，这场委托已经与门外的你们无缘了。&lt;br&gt;
