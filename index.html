@@ -1459,7 +1459,7 @@ d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼�
   fy: 9,
   cooldowns: {},
   skills: [
-    { id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, target: &quot;single&quot;, power: 1.0, fixedDamage: 15, variance: 10, desc: &quot;普普通通的远程射击，不受力量影响&quot; }
+    { id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, target: &quot;single&quot;, power: 1.0, fixedDamage: 15, variance: 10, desc: &quot;普普通通的射击，远程&quot; },
     { id: &quot;precision&quot;, name: &quot;干扰&quot;, type: &quot;debuff&quot;, target: &quot;single&quot;, effectTarget: &quot;enemy&quot;, effectId: &quot;defDown&quot;, effectName: &quot;防御降低&quot;, effectValue: -0.2, duration: 2, desc: &quot;降低目标20%防御，持续2回合&quot; },
     { id: &quot;weaken&quot;, name: &quot;弱化&quot;, type: &quot;debuff&quot;, target: &quot;single&quot;, effectTarget: &quot;enemy&quot;, effectId: &quot;atkDown&quot;, effectName: &quot;攻击降低&quot;, effectValue: -0.2, duration: 2, desc: &quot;降低目标20%攻击，持续2回合&quot; }
   ],
@@ -1965,11 +1965,11 @@ d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼�
   &lt;&lt;if $time &gt;= $atime + 30&gt;&gt;&lt;&lt;set $xunluoa += 8&gt;&gt;&lt;&lt;set $atime = 999&gt;&gt;&lt;&lt;/if&gt;&gt;
    &lt;&lt;if $time &gt;= $btime + 30&gt;&gt;&lt;&lt;set $xunluob += 4&gt;&gt;&lt;&lt;set $btime = 999&gt;&gt;&lt;&lt;/if&gt;&gt;
   
-  &lt;&lt;if $time &gt;= 420 &amp;&amp; !$jieju.includes(&quot;异变日&quot;) &amp;&amp; !hasVisited(&quot;分兵&quot;)&gt;&gt;
+  &lt;&lt;if $time &gt;= 420 &amp;&amp; !$jieju.includes(&quot;异变日&quot;) &amp;&amp; hasVisited(&quot;分兵&quot;)&gt;&gt;
     &lt;&lt;set $jieju.push(&quot;异变日&quot;)&gt;&gt;
     &lt;&lt;goto &quot;关门&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
     
-    &lt;&lt;if $time &gt;= 30 &amp;&amp; !$jieju.includes(&quot;你搞什么？&quot;) &amp;&amp; !hasVisited(&quot;小唐&quot;) &amp;&amp; !hasVisited(&quot;耗子&quot;)&gt;&gt;
+    &lt;&lt;if $time &gt;= 30 &amp;&amp; !$jieju.includes(&quot;你搞什么？&quot;) &amp;&amp; passage() !== &quot;小唐&quot; &amp;&amp; passage() !== &quot;耗子&quot;&gt;&gt;
     &lt;&lt;set $jieju.push(&quot;你搞什么？&quot;)&gt;&gt;
     &lt;&lt;goto &quot;来晚了&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
     
@@ -3541,15 +3541,15 @@ Debuffs：
             &lt;&lt;set $party[0].skills.push({ id: &quot;triple_stab&quot;, name: &quot;三重刺&quot;, type: &quot;attack&quot;, power: 0.8, weapon: &quot;dagger&quot;, desc: &quot;连续三次刺击&quot; })&gt;&gt;
           &lt;&lt;case &quot;spear&quot;&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;thrust&quot;, name: &quot;突刺&quot;, type: &quot;attack&quot;, power: 1.8, weapon: &quot;spear&quot;, desc: &quot;猛刺目标&quot; })&gt;&gt;
-            &lt;&lt;set $party[0].skills.push({ id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, power: 2.5, fixedDamage: 37, variance: 16, weapon: &quot;spear&quot;, desc: &quot;消耗1子弹射击，不受力量影响&quot;, consume: { type: &quot;bullet&quot;, amount: 1 } })&gt;&gt;
+            &lt;&lt;set $party[0].skills.push({ id: &quot;shoot&quot;, name: &quot;射击&quot;, type: &quot;attack&quot;, power: 2.5, fixedDamage: 37, variance: 16, weapon: &quot;spear&quot;, desc: &quot;消耗1子弹射击，远程&quot;, consume: { type: &quot;bullet&quot;, amount: 1 } })&gt;&gt;
           &lt;&lt;case &quot;bow&quot;&gt;&gt;
-            &lt;&lt;set $party[0].skills.push({ id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, fixedDamage: 20, variance: 10, weapon: &quot;bow&quot;, desc: &quot;高精度射击，不受力量影响&quot; })&gt;&gt;
+            &lt;&lt;set $party[0].skills.push({ id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, fixedDamage: 20, variance: 10, weapon: &quot;bow&quot;, desc: &quot;高精度射击，远程&quot; })&gt;&gt;
           &lt;&lt;case &quot;hammer&quot;&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;smash&quot;, name: &quot;猛砸&quot;, type: &quot;attack&quot;, power: 2.2, weapon: &quot;hammer&quot;, desc: &quot;强力砸击&quot; })&gt;&gt;
           &lt;&lt;case &quot;shard&quot;&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;shard_strike&quot;, name: &quot;碎片打击&quot;, type: &quot;attack&quot;, power: 0.8, weapon: &quot;shard&quot;, desc: &quot;用碎片攻击&quot; })&gt;&gt;
           &lt;&lt;case &quot;喷火器&quot;&gt;&gt;
-              &lt;&lt;set $party[0].skills.push({ id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, fixedDamage: 20, variance: 20, weapon: &quot;喷火器&quot;, desc: &quot;消耗燃料，喷射火焰，不受力量影响&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } })&gt;&gt;
+              &lt;&lt;set $party[0].skills.push({ id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, fixedDamage: 20, variance: 20, weapon: &quot;喷火器&quot;, desc: &quot;消耗燃料，喷射火焰，远程&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } })&gt;&gt;
             &lt;&lt;set $party[0].skills.push({ id: &quot;flamethrower_punch&quot;, name: &quot;捶打&quot;, type: &quot;attack&quot;, power: 1, weapon: &quot;喷火器&quot;, desc: &quot;用喷火器捶打&quot; })&gt;&gt;
         &lt;&lt;/switch&gt;&gt;
         &lt;&lt;redo&gt;&gt;
@@ -4307,7 +4307,7 @@ Debuffs：
   &lt;&lt;set $equippedWeapon to &quot;bow&quot;&gt;&gt;
   &lt;&lt;set $bullets to 0&gt;&gt;
   &lt;&lt;set _newSkills = [
-   { id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, fixedDamage: 20, variance: 10, desc: &quot;高精度射击，不受力量影响&quot;, weapon: &quot;bow&quot; }
+   { id: &quot;aimed_shot&quot;, name: &quot;瞄准射击&quot;, type: &quot;attack&quot;, power: 1.0, fixedDamage: 20, variance: 10, desc: &quot;高精度射击，远程&quot;, weapon: &quot;bow&quot; }
   ]&gt;&gt;
   &lt;&lt;set $party[0].skills = $party[0].skills.concat(_newSkills)&gt;&gt;
   &lt;&lt;redo &quot;weaponCabinet&quot;&gt;&gt;
@@ -4723,7 +4723,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
             &lt;&lt;set $fuel += 30&gt;&gt;
             &lt;&lt;set $ysshy += 40&gt;&gt;
             &lt;&lt;set $party[0].skills.push(
-             { id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, fixedDamage: 20, variance: 20, weapon: &quot;喷火器&quot;, desc: &quot;消耗燃料，喷射火焰，不受力量影响&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } },
+             { id: &quot;flamethrower_fire&quot;, name: &quot;喷火&quot;, type: &quot;attack&quot;, power: 1.5, fixedDamage: 20, variance: 20, weapon: &quot;喷火器&quot;, desc: &quot;消耗燃料，喷射火焰，远程&quot;, consume: { type: &quot;fuel&quot;, amount: 2 } },
               { id: &quot;flamethrower_punch&quot;, name: &quot;捶打&quot;, type: &quot;attack&quot;, power: 1, weapon: &quot;喷火器&quot;, desc: &quot;用喷火器捶打&quot; }
             )&gt;&gt;
             &lt;&lt;redo &quot;shop&quot;&gt;&gt;
@@ -8440,7 +8440,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
       &lt;&lt;linkreplace &quot;杀死她&quot;&gt;&gt;
         &lt;&lt;replace &quot;#zhanbai14&quot;&gt;&gt;
           &lt;&lt;shixie&gt;&gt;或许你们给了她一个足够华丽的落幕，血从胸前的伤口涌出，在她衣襟上绣上一朵开得灿烂的玫瑰。现在的她像个睡美人。只有醒不过来的睡美人才是最美的。&lt;br&gt;
-          &lt;&lt;if $tang === 1&gt;&gt;堂吉诃德捂住胸口，当你们关切地询问她时，她显得和你们同样奇怪，说她的心脏突然有点不舒服，一种绵延的刺痛感挥之不去。&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+          &lt;&lt;if $tang === 1&gt;&gt;堂吉诃德捂住胸口，当你们关切地询问她时，她显得和你们同样奇怪，说她的心脏突然有点不舒服，一种绵延的刺痛感挥之不去。&lt;br&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$du1 = 0]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$du1 = 0]]&lt;&lt;/if&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
       &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
