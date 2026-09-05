@@ -1969,7 +1969,8 @@ d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼�
     &lt;&lt;set $jieju.push(&quot;异变日&quot;)&gt;&gt;
     &lt;&lt;goto &quot;关门&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
     
-    &lt;&lt;if $time &gt;= 30 &amp;&amp; !$jieju.includes(&quot;你搞什么？&quot;) &amp;&amp; passage() !== &quot;小唐&quot; &amp;&amp; passage() !== &quot;耗子&quot;&gt;&gt;
+    &lt;&lt;if $time &gt;= 30 &amp;&amp; !$jieju.includes(&quot;你搞什么？&quot;) &amp;&amp; !hasVisited(&quot;小唐&quot;
+    ) &amp;&amp; !hasVisited(&quot;耗子&quot;)&gt;&gt;
     &lt;&lt;set $jieju.push(&quot;你搞什么？&quot;)&gt;&gt;
     &lt;&lt;goto &quot;来晚了&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
     
