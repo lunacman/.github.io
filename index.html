@@ -680,7 +680,7 @@ p公司员工带着你们找到了切萨拉部长，那位给你们下了这场�
 “金主要的是一块特殊的硬血碎片，硬血，知道吧，就是拉曼却这个血魔家族的氏族能力，一种由血液转化来的特殊材料。“&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $tang ===1&gt;&gt;
-堂吉诃德欢快地哼着小曲，在你们身前大步前进，你们愿意跟着她来梦幻血猎，她看起来很开心。&lt;br&gt;&lt;br&gt;
+堂吉诃德欢快地哼着小曲，在你们身前大步前进，你们愿意跟着她来梦幻血猎，她看起来很开心。&lt;&lt;set $tanghg+= 1&gt;&gt;&lt;br&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 你们步入了荒芜的地界，大地赤裸着血红色的土壤，像是被鲜血浇透，却又干涸到板结。地表上连别处常见的红色废墟都很少，一眼就能把这块区域的所有一切看尽，行于此处，给人一种无所遁形的本能恐慌。&lt;br&gt;
@@ -854,7 +854,7 @@ p公司员工带着你们找到了切萨拉部长，那位给你们下了这场�
 “你们是前来讨伐我的，还是来向我忏悔的？”&lt;br&gt;
 你们并没有忏悔的心情，但他似乎也没心情主动攻击。&lt;br&gt;&lt;br&gt;
 [[离开|休整房]]&lt;br&gt;
-[[发起攻击|神父战]]&lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;&lt;br&gt;
+[[发起攻击|神父战][$tanghg -= 1]]&lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;&lt;br&gt;
 &lt;&lt;suixing&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
@@ -1069,7 +1069,7 @@ p公司员工带着你们找到了切萨拉部长，那位给你们下了这场�
 &lt;&lt;if $jindu === 1 &amp;&amp; ($time &gt;= $tangtime +30 &amp;&amp; $time &lt;= $tangtime +45 )&gt;&gt;
 &lt;&lt;set $tang = 1&gt;&gt;&lt;&lt;tangrudui&gt;&gt;
 堂吉诃德如约在这里等你们。&lt;br&gt;
-&lt;font color=&quot;green&quot;&gt;堂吉诃德已归队。&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;set $tangtime = 999&gt;&gt;
+&lt;font color=&quot;green&quot;&gt;堂吉诃德已归队。&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;set $tangtime = 999&gt;&gt;&lt;&lt;if $tanghg &lt;= 1&gt;&gt;&lt;&lt;set $hanghg += 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $tang ===1&gt;&gt;&lt;&lt;set $juexing1 = 2&gt;&gt;&lt;&lt;set $juexing2 = 2&gt;&gt;&lt;&lt;juexing&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
 
@@ -1138,7 +1138,7 @@ p公司员工带着你们找到了切萨拉部长，那位给你们下了这场�
 &lt;&lt;elseif $jindu === 2 &amp;&amp; $tang === 0 &amp;&amp; $tangtime != 999 &amp;&amp; ($time &gt;= $tangtime +30 &amp;&amp; $time &lt;= $tangtime +45 )&gt;&gt;
 &lt;&lt;set $tang = 1&gt;&gt;
 堂吉诃德如约在这里等你们。&lt;br&gt;
-&lt;font color =&quot;green&quot;&gt;堂吉诃德已归队。&lt;&lt;tangrudui&gt;&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;set $tangtime = 999&gt;&gt;
+&lt;font color =&quot;green&quot;&gt;堂吉诃德已归队。&lt;&lt;tangrudui&gt;&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;set $tangtime = 999&gt;&gt;&lt;&lt;if $tanghg &lt;= 1&gt;&gt;&lt;&lt;set $hanghg += 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $tang ===1&gt;&gt;&lt;&lt;set $juexing1 = 2&gt;&gt;&lt;&lt;set $juexing2 = 2&gt;&gt;&lt;&lt;juexing&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
 
@@ -3811,7 +3811,7 @@ Debuffs：
 &lt;&lt;if visited() === 2&gt;&gt;
 &lt;&lt;linkreplace &quot;交换一些拉曼却的情报&quot;&gt;&gt;&lt;&lt;set $mibaohg += 1&gt;&gt;
 卡米尔和葆拉还没见过真正的血魔，不过他们毕竟是协会的明星，血魔在他们这个层次不会仅仅是个传说。多亏你曾有个血魔朋友，这方面的情报给了你不小的优势。&lt;br&gt;
-卡米尔和葆拉向你们展示了拉曼却的地图，说拉曼却划分为四个区域，像一个闯关游戏，只有战胜管理者开启机关才能前进，a区的“理发师”妮可丽娜，b区的神父-古良布洛，c区的“公主”杜尔西内亚，开启ab的机关后才能进入c区，截至目前还没人做到这一步，而d区有什么就更没人知道了。&lt;br&gt;
+卡米尔和葆拉向你们展示了拉曼却的地图，说拉曼却划分为四个区域，像一个闯关游戏，只有战胜管理者开启机关才能前进，a区的“理发师”妮可丽娜，b区的“神父”古良布洛，c区的“公主”杜尔西内亚，开启ab的机关后才能进入c区，截至目前还没人做到这一步，而d区有什么就更没人知道了。&lt;br&gt;
 你则向他们讲了很多血魔有关的知识，你告诉他们血魔其实都是很理性的家伙，在食血之外不会刻意伤人。听到这里卡米尔眉头一皱，他摇摇头，说拉曼却的血魔不是这样，他们会攻击视线中的所有人类，别放松警惕，他们早就疯了。&lt;br&gt;&lt;br&gt;
 &lt;&lt;if $hour ===0&gt;&gt;[[继续聊（10min）|卡米尔][$minute +=10]]&lt;br&gt;&lt;&lt;/if&gt;&gt;
 [[回去广场|$lastLocation]]&lt;&lt;/linkreplace&gt;&gt;
@@ -4168,15 +4168,15 @@ Debuffs：
     }&gt;&gt;
     /* 构建显示列表（中文名），同时保留原始ID以便查找 */
     &lt;&lt;set _displayItems = []&gt;&gt;
-    &lt;&lt;for _i = 0; _i &lt; $beibao.length; _i++&gt;&gt;
+    &lt;&lt;for _i to 0; _i lt $beibao.length; _i++&gt;&gt;
       &lt;&lt;set _id = $beibao[_i]&gt;&gt;
       &lt;&lt;set _name = _weaponNames[_id] or _id&gt;&gt;
       &lt;&lt;set _displayItems.push({ id: _id, name: _name })&gt;&gt;
     &lt;&lt;/for&gt;&gt;
-    &lt;&lt;for _i = 0; _i &lt; _displayItems.length; _i++&gt;&gt;
+    &lt;&lt;for _i to 0; _i lt _displayItems.length; _i++&gt;&gt;
       _displayItems[_i].name&lt;&lt;if _i lt _displayItems.length - 1&gt;&gt;、&lt;&lt;/if&gt;&gt;
     &lt;&lt;/for&gt;&gt;（$beibao.length/20）&lt;br&gt;
-    &lt;&lt;if $hasVisited(&quot;分兵&quot;)&gt;&gt;
+    &lt;&lt;if hasVisited(&quot;分兵&quot;)&gt;&gt;
       你希望丢弃（只丢弃一个，但丢弃后无法再取回）：&lt;br&gt;
       &lt;&lt;textbox &quot;_itemToDelete&quot; &quot;&quot;&gt;&gt;
       &lt;br&gt;
@@ -4193,7 +4193,7 @@ Debuffs：
           &lt;&lt;set _targetId = _itemToDelete&gt;&gt;
         &lt;&lt;/if&gt;&gt;
         &lt;&lt;if _targetId&gt;&gt;
-          &lt;&lt;set $beibao.delete(_targetId)&gt;&gt;
+          &lt;&lt;set $beibao.deleteFirst(_targetId)&gt;&gt;
           &lt;&lt;redo &quot;beibaodiuqi&quot;&gt;&gt;
         &lt;&lt;else&gt;&gt;
           &lt;&lt;redo &quot;beibaodiuqi&quot;&gt;&gt;
@@ -5508,7 +5508,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 /*在每一次战斗开始前的前一个页面，把这一度复制进去然后根据自己需求改数值，名字一定要和敌人行动大全里面的一样。*/
 
 &lt;&lt;set $combatEnemyIds = [&quot;question_bloodfiend&quot;]&gt;&gt;
-&lt;&lt;combatInit&gt;&gt;
+&lt;&lt;combatInit&gt;&gt;&lt;&lt;if viseted() === 1 &amp;&amp; $tanghg &gt;= 2&gt;&gt;&lt;&lt;set $tanghg -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 </tw-passagedata><tw-passagedata pid="107" name="小屋搜索" tags="nobr noz" position="2050,1725" size="100,100">
 &lt;&lt;if !$tezhi.includes(&quot;狗鼻子&quot;)&gt;&gt;&lt;&lt;set _xw = random(1,8)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set _xw = random(1,2)&gt;&gt;你的狗鼻子要派上用场了。&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
 
@@ -7039,7 +7039,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
             &lt;&lt;replace &quot;#ka2&quot;&gt;&gt;
               她歪歪头：&quot;我不知道我能不能加入你们，或许这座遗迹里会有我向往的东西。——不过我可以暂时和你们一起走。&quot;&lt;br&gt;
               她同意了。至少暂时是。
-              &lt;&lt;set $tang = 1&gt;&gt;&lt;&lt;tangrudui&gt;&gt;
+              &lt;&lt;set $tang = 1&gt;&gt;&lt;&lt;tangrudui&gt;&gt;&lt;&lt;set $tanghg = 1&gt;&gt;
             &lt;&lt;/replace&gt;&gt;
           &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
           
@@ -8403,7 +8403,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
       &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
       &lt;&lt;linkreplace &quot;放他一马&quot;&gt;&gt;
         &lt;&lt;replace &quot;#zhanbai13&quot;&gt;&gt;
-          在确定他短时间无法恢复后，你们绕过他，开始翻找他的房间。而他至始至终没有抬头去看你们。或许生死对他是最不重要的事。你们的决定是对的吗？谁都说不好。
+          在确定他短时间无法恢复后，你们绕过他，开始翻找他的房间。而他至始至终没有抬头去看你们。或许生死对他是最不重要的事。你们的决定是对的吗？谁都说不好。&lt;&lt;set $tanghg += 1&gt;&gt;
           &lt;&lt;if $duhg &lt;=-3&gt;&gt;&lt;&lt;set $duhg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;
           &lt;&lt;if $sanghg &lt;=-3&gt;&gt;&lt;&lt;set $sanghg +=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
           &lt;&lt;if $enemyParty.length &gt; 0&gt;&gt;[[继续|战斗胜利][$shen1 = 3]]&lt;&lt;else&gt;&gt;[[走吧|$lastLocation][$shen1 = 3]]&lt;&lt;/if&gt;&gt;
@@ -9700,10 +9700,10 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
         &lt;&lt;set $dszong += 5&gt;&gt;
         &lt;&lt;run memorize(&#39;dszong&#39;, $dszong)&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="155" name="测试β" tags="" position="2875,925" size="100,100">
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="155" name="测试β" tags="" position="2450,575" size="100,100">
 
-&lt;&lt;set $wu = 1&gt;&gt;
-[[公主]]</tw-passagedata><tw-passagedata pid="156" name="来晚了" tags="nobr" position="675,1425" size="100,100">
+&lt;&lt;set $wu = 1&gt;&gt;&lt;&lt;set $tang = 1&gt;&gt;&lt;&lt;set $tangjx = 1&gt;&gt;
+[[隐藏房]]</tw-passagedata><tw-passagedata pid="156" name="来晚了" tags="nobr" position="675,1425" size="100,100">
 &lt;&lt;if hasVisited(&quot;任务&quot;) &gt;&gt;
 你们花费了太多时间。你们不该浪费这么多时间。等你们终于赶到p公司的门前时，被特意划出来的区域已经锁门，毫不留情地将你们拒之门外。&lt;br&gt;
 不管门后的其他人今日之后会如何，这场委托已经与门外的你们无缘了。&lt;br&gt;
