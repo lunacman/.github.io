@@ -1293,14 +1293,8 @@ c区的主人，拉曼却的公主，杜尔西内亚。一袭紫色的长裙，�
 &lt;font color =&quot;red&quot;&gt;血魔&lt;/font&gt;&lt;font color =&quot;yellow&quot;&gt;敌人造成伤害时会在场上留下&lt;/font&gt;&lt;font color =&quot;red&quot;&gt;血宴&lt;/font&gt; &lt;br&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 [[开始战斗|主战斗]]
-&lt;&lt;set $DiRenName = &quot;公主-杜尔西内亚&quot;&gt;&gt;/*三个都是敌人名字。*/
-&lt;&lt;set $Win =  $DiRenName&gt;&gt;
-&lt;&lt;set $Fail =  $DiRenName&gt;&gt;
-&lt;&lt;set $DiRenXueLiang =200&gt;&gt;/*敌人当前血量。*/
-&lt;&lt;set $DiRenXueMax=200&gt;&gt;/*敌人最大血量。*/
-&lt;&lt;set $DiRenGongJi =40&gt;&gt;/*敌人攻击。*/
-&lt;&lt;set $DiRenMinJie=37&gt;&gt;/*敌人敏捷。*/
-&lt;&lt;set $DiRenFangYu=17&gt;&gt;/*敌人防御。*/&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="d1" tags="nobr" position="2825,1225" size="100,100">
+&lt;&lt;set $combatEnemyIds = [&quot;dulcinea&quot;]&gt;&gt;
+&lt;&lt;combatInit&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="d1" tags="nobr" position="2825,1225" size="100,100">
 
 &lt;&lt;if $escapeWithKing &amp;&amp; _count &gt;=1&gt;&gt;
 &lt;font color =&quot;red&quot;&gt;被硬血和血魔封锁的出口现在已经被打开。而他们重新在你们身后追逐。&lt;br&gt;
@@ -1508,7 +1502,6 @@ d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼�
 
 &lt;&lt;set $enemyLibrary to {}&gt;&gt;
 
-/* ===== 1. 疯狂的血魔 ===== */
 /* ===== 1. 疯狂的血魔 ===== */
 &lt;&lt;set $enemyLibrary.mad_bloodfiend = {
   id: &quot;mad_bloodfiend&quot;,
@@ -1895,6 +1888,7 @@ d区是一个巨大的螺旋，小路从四周卷向中间，而拉曼却之眼�
 
 
 &lt;&lt;set $combat = {}&gt;&gt;
+&lt;&lt;set $combatEnemyIds = []&gt;&gt;
 &lt;&lt;set $combat.round = 1&gt;&gt;
 &lt;&lt;set $combat.log = []&gt;&gt;
 &lt;&lt;set $combat.ended = false&gt;&gt;
@@ -3132,12 +3126,9 @@ ver 1.1.0</tw-passagedata><tw-passagedata pid="43" name="StoryAuthor" tags="" po
   &lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 
-/* --- 胜负检测 --- */
-&lt;&lt;if _enemyAlive === 0&gt;&gt;
+&lt;&lt;if _enemyAlive &lt;= 0&gt;&gt;
   &lt;&lt;goto &quot;战斗胜利&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $party[0].hp &lt;= 0&gt;&gt;
+&lt;&lt;elseif _playerAlive &lt;= 0&gt;&gt;
   &lt;&lt;goto &quot;战斗失败&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
@@ -4794,9 +4785,6 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
 &lt;&lt;/linkreplace&gt;&gt;&lt;br&gt;
 [[开始战斗|主战斗]]&lt;br&gt;
 
-&lt;&lt;set $DiRenName = &quot;桑秋&quot;&gt;&gt;
-&lt;&lt;set $Win = $DiRenName&gt;&gt;
-&lt;&lt;set $Fail = $DiRenName&gt;&gt;
 &lt;&lt;set $combatEnemyIds = [&quot;sangqiu&quot;]&gt;&gt;
 &lt;&lt;combatInit&gt;&gt;
 
@@ -5914,8 +5902,7 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
  队友可能会在战斗中&lt;strong style=&quot;color:yellow;&quot;&gt;永久死亡&lt;/strong&gt;，所以记得及时撤退重伤的队友，这会花费一回合。&lt;br&gt;
 &lt;font color =&quot;red&quot;&gt;血魔&lt;/font&gt;&lt;font color =&quot;yellow&quot;&gt;敌人造成伤害时会在场上留下&lt;/font&gt;&lt;font color =&quot;red&quot;&gt;血宴&lt;/font&gt; &lt;br&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-[[开始战斗|主战斗]]
-
+[[开始战斗|主战斗]]&lt;br&gt;
 &lt;&lt;set $combatEnemyIds = [&quot;dulcinea&quot;]&gt;&gt;
 &lt;&lt;combatInit&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="摩天轮战后" tags="nobr noz" position="2900,1525" size="100,100">
 &lt;&lt;set $jindu = 4&gt;&gt;
@@ -6422,44 +6409,44 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
         &lt;&lt;run memorize(&#39;dszong&#39;, $dszong)&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="127" name="回忆" tags="noreturn nobr noz" position="250,1450" size="100,100">
-&lt;&lt;if $ngsm === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $ngsm === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt;&lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt;错失时间...... &lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[你搞什么？]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $bzsjbhs === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $bzsjbhs === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 错误的敌人......快逃......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[不作死就不会死]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $sbdwt === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $sbdwt === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt;拿人钱财......替人消灾...... &lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[失败的委托]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
 
-&lt;&lt;if $ybr === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $ybr === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 出不去了......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[异变日]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $lmqzwdgs === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $lmqzwdgs === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 协会......在拉曼却外......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[与拉曼却无关的死亡]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $qcyz === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $qcyz === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 输一次罢了......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[棋差一招]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $dszs === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $dszs === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 胜利......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;[[都市之胜]]&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $msnyfz === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $msnyfz === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; p公司......得到了......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[灭世诺亚方舟]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $xywltz === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $xywltz === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; p公司......得到了......意味着有人失去......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[血疫亡灵天灾]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $xszz === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $xszz === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 血漫拉曼却......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[血色终章]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $zsr === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $zsr === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 无意冒犯......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;[[篆书人]]&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $nsql === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $nsql === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 他不想伤人的......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;kaishi&quot;&gt;[[内锁囚笼]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $zyqsyxmss === 0&gt;&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 这个结局尚未被发现。&lt;/span&gt;
+&lt;&lt;if $zyqsyxmss === 0&gt;&gt; 这个结局尚未被发现。&lt;br&gt; &lt;span style=&quot;font-size:0.9em; color: #aaa&quot;&gt; 永远天真下去吧......&lt;/span&gt;
 &lt;&lt;else&gt;&gt;&lt;div class=&quot;tuihuan&quot;&gt;[[正义骑士与血魔史诗]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
 [[返回|$return]]
@@ -9647,8 +9634,8 @@ hp弹（40万眼）：迅速恢复状态。一个很优惠的价格，卖家大�
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="155" name="测试β" tags="" position="2875,925" size="100,100">
 
-&lt;&lt;set $du1 = 1&gt;&gt;&lt;&lt;set $tang = 1&gt;&gt;&lt;&lt;set $tangjx = 3&gt;&gt;
-[[c1]]</tw-passagedata><tw-passagedata pid="156" name="来晚了" tags="nobr" position="675,1425" size="100,100">
+&lt;&lt;set $wu = 1&gt;&gt;
+[[公主]]</tw-passagedata><tw-passagedata pid="156" name="来晚了" tags="nobr" position="675,1425" size="100,100">
 &lt;&lt;if hasVisited(&quot;任务&quot;) &gt;&gt;
 你们花费了太多时间。你们不该浪费这么多时间。等你们终于赶到p公司的门前时，被特意划出来的区域已经锁门，毫不留情地将你们拒之门外。&lt;br&gt;
 不管门后的其他人今日之后会如何，这场委托已经与门外的你们无缘了。&lt;br&gt;
